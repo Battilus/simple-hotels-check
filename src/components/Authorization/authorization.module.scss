@@ -1,0 +1,33 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  //background: url("../../assets/png/IMG_20210312_140957_174 1.png");
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+
+  .imageField {
+
+
+    .inputField {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin: auto;
+
+      input {
+        margin-top: 10px;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+    }
+  }
+}
