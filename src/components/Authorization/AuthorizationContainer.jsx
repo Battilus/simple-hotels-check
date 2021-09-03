@@ -1,32 +1,21 @@
 import {connect} from "react-redux";
-import {
-    updateEmailFieldAc,
-    updatePasswordFieldAc,
-    signInAc,
-    signOutAc
-} from "../../redux/authorization-reducer";
+import {signInAc, signOutAc} from "../../redux/authorization-reducer";
 import Authorization from "./Authorization";
 
 
 const mapStateToProps = (state) => {
     return {
-        userEmail: state.authorization.userEmail,
-        userPassword: state.authorization.userPassword,
         errors: state.authorization.errors,
+        emailIsValid: state.authorization.emailIsValid,
+        passwordIsValid: state.authorization.passwordIsValid,
         loggedIn: state.authorization.loggedIn,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateEmailField: (payload) => {
-            dispatch(updateEmailFieldAc(payload));
-        },
-        updatePasswordField: (payload) => {
-            dispatch(updatePasswordFieldAc(payload));
-        },
-        signIn: () => {
-            dispatch(signInAc());
+        signIn: (payload) => {
+            dispatch(signInAc(payload));
         },
         signOut: () => {
             dispatch(signOutAc());

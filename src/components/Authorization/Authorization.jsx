@@ -1,35 +1,26 @@
-import React, {useEffect} from "react";
+import React from "react";
 import style from "./authorization.module.scss"
 
 
 const Authorization = (props) => {
 
     let {
-        userEmail,
-        userPassword,
         errors,
+        emailIsValid,
+        passwordIsValid,
         // loggedIn,
-        updateEmailField,
-        updatePasswordField,
         signIn
     } = props;
 
 
-    useEffect(() => {
-        // if (loggedIn) console.log('is valid');
-    });
-
-
-    const callUpdateUserEmail = (e) => {
-        updateEmailField(e.target.value);
-    }
-
-    const callUpdateUserPassword = (e) => {
-        updatePasswordField(e.target.value);
-    }
+    let userEmailDat = React.createRef();
+    let userPasswordDat = React.createRef();
 
     const callSingIn = () => {
-        signIn();
+        signIn({
+            userEmail: userEmailDat.current.value,
+            userPassword: userPasswordDat.current.value
+        });
     }
 
     return (
@@ -39,18 +30,18 @@ const Authorization = (props) => {
                     <input
                         type="Email"
                         placeholder="Email"
-                        value={userEmail}
-                        onChange={callUpdateUserEmail}
+                        autoComplete="on"
+                        ref={userEmailDat}
                     />
-                    <span>{errors.email}</span>
+                    {!emailIsValid ? <span>{errors.email}</span> : null}
 
                     <input
                         type="password"
                         placeholder="Password"
-                        value={userPassword}
-                        onChange={callUpdateUserPassword}
+                        autoComplete="on"
+                        ref={userPasswordDat}
                     />
-                    <span>{errors.password}</span>
+                    {!passwordIsValid ? <span>{errors.password}</span> : null}
 
                     <button onClick={callSingIn}>Sign in</button>
                 </div>

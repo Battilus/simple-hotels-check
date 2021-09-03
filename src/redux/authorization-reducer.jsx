@@ -7,16 +7,21 @@ const UPDATE_PASSWORD_FIELD = "UPDATE-PASSWORD-FIELD"
 
 
 let initialState = {
+    users: [
+        {
+            id: 0,
+            userEmail: '',
+            userPassword: ''
+        }
+    ],
     errors: {
         email: '',
         password: '',
     },
-    userEmail: '',
-    userPassword: '',
     loggedIn: false,
 }
 
-const authorizationReducer = (state=initialState, action) => {
+const authorizationReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case UPDATE_EMAIL_FIELD:
@@ -27,19 +32,24 @@ const authorizationReducer = (state=initialState, action) => {
 
         case SIGN_IN:
             let status = validateUserdata({
-                email:state.userEmail,
-                password:state.userPassword}
+                    email: action.payload.userEmail,
+                    password: action.payload.userPassword
+                }
             )
             if (status.isValid) {
                 return {
                     ...state,
                     errors: status.errors,
+                    emailIsValid: status.emailIsValid,
+                    passwordIsValid: status.passwordIsValid,
                     loggedIn: true
                 }
             } else {
                 return {
                     ...state,
                     errors: status.errors,
+                    emailIsValid: status.emailIsValid,
+                    passwordIsValid: status.passwordIsValid,
                     loggedIn: false
                 }
             }
@@ -53,9 +63,9 @@ const authorizationReducer = (state=initialState, action) => {
 }
 
 
-export const updateEmailFieldAc = (payload) => ({type:UPDATE_EMAIL_FIELD, payload})
-export const updatePasswordFieldAc = (payload) => ({type:UPDATE_PASSWORD_FIELD, payload})
-export const signInAc = () => ({type:SIGN_IN})
-export const signOutAc = () => ({type:SIGN_OUT})
+// export const updateEmailFieldAc = (payload) => ({type:UPDATE_EMAIL_FIELD, payload})
+// export const updatePasswordFieldAc = (payload) => ({type:UPDATE_PASSWORD_FIELD, payload})
+export const signInAc = (payload) => ({type: SIGN_IN, payload})
+export const signOutAc = () => ({type: SIGN_OUT})
 
 export default authorizationReducer;
