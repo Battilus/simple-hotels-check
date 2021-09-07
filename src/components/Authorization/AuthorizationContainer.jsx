@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {signInAc, signOutAc} from "../../redux/authorization-reducer";
-import Authorization from "./Authorization";
+import {signInAc, signOutAc} from "../../redux/authorization/authorization-reducer";
+import NwrpAuthorization from "./Authorization";
 
 
 const mapStateToProps = (state) => {
@@ -23,6 +23,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const WrappedAuthorization = connect(mapStateToProps, mapDispatchToProps)(Authorization);
+const Authorization = connect(mapStateToProps, mapDispatchToProps)(NwrpAuthorization);
 
-export default WrappedAuthorization;
+export default Authorization;

@@ -21,8 +21,25 @@
       flex-direction: column;
       margin: auto;
 
-      input {
+      .description {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
         margin-top: 10px;
+        margin-bottom: 7px;
+        align-self: baseline;
+      }
+
+      input {
+        width: 345px;
+        height: 50px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 18px;
+        align-items: center;
+        padding-left: 15px;
       }
 
       button {

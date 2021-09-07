@@ -1,16 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import style from "./authorization.module.scss"
 
 
-const Authorization = (props) => {
+const NwrpAuthorization = (props) => {
 
     let {
         errors,
         emailIsValid,
         passwordIsValid,
-        // loggedIn,
+        loggedIn,
         signIn
     } = props;
+
+    useEffect(() => {
+        return () => {
+            if (loggedIn) {console.log("dispatch(loginHotels)")};
+        }
+    })
 
 
     let userEmailDat = React.createRef();
@@ -27,6 +33,7 @@ const Authorization = (props) => {
         <div className={style.wrapper}>
             <div className={style.imageField}>
                 <div className={style.inputField}>
+                    <div className={style.description}>Логин</div>
                     <input
                         type="Email"
                         placeholder="Email"
@@ -35,6 +42,7 @@ const Authorization = (props) => {
                     />
                     {!emailIsValid ? <span>{errors.email}</span> : null}
 
+                    <div className={style.description}>Пароль</div>
                     <input
                         type="password"
                         placeholder="Password"
@@ -51,4 +59,4 @@ const Authorization = (props) => {
 }
 
 
-export default Authorization;
+export default NwrpAuthorization;

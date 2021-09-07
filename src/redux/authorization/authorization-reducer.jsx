@@ -1,4 +1,4 @@
-import {validateUserdata} from "../feauters/login/login";
+import {validateUserdata} from "../../feauters/login/login";
 
 const SIGN_IN = "SIGN-IN"
 const SIGN_OUT = "SIGN-OUT"
@@ -11,13 +11,16 @@ let initialState = {
         {
             id: 0,
             userEmail: '',
-            userPassword: ''
+            userPassword: '',
+            loggedIn: false
         }
     ],
     errors: {
         email: '',
         password: '',
     },
+    emailIsValid: false,
+    passwordIsValid: false,
     loggedIn: false,
 }
 
@@ -58,7 +61,7 @@ const authorizationReducer = (state = initialState, action) => {
             return {...state, loggedIn: false}
 
         default:
-            return {...state}
+            return state
     }
 }
 
