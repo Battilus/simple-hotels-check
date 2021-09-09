@@ -1,32 +1,25 @@
-import React, {useEffect} from "react";
-import style from "./authorization.module.scss"
+import React from "react";
+import style from "./auth.module.scss"
+import {useDispatch, useSelector} from "react-redux";
+import {signIn} from "../../redux/auth/auth-actions";
 
 
-const NwrpAuthorization = (props) => {
+const Auth = () => {
 
-    let {
-        errors,
-        emailIsValid,
-        passwordIsValid,
-        loggedIn,
-        signIn
-    } = props;
+    let errors = useSelector(state => state.auth.errors);
+    let emailIsValid = useSelector(state => state.auth.emailIsValid);
+    let passwordIsValid = useSelector(state => state.auth.passwordIsValid);
 
-    useEffect(() => {
-        return () => {
-            if (loggedIn) {console.log("dispatch(loginHotels)")};
-        }
-    })
-
+    const dispatch = useDispatch()
 
     let userEmailDat = React.createRef();
     let userPasswordDat = React.createRef();
 
     const callSingIn = () => {
-        signIn({
+        dispatch(signIn({
             userEmail: userEmailDat.current.value,
             userPassword: userPasswordDat.current.value
-        });
+        }));
     }
 
     return (
@@ -59,4 +52,4 @@ const NwrpAuthorization = (props) => {
 }
 
 
-export default NwrpAuthorization;
+export default Auth;

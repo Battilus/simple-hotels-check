@@ -1,12 +1,27 @@
-import {combineReducers, createStore} from "redux";
-import authorizationReducer from "./authorization/authorization-reducer";
+// import {combineReducers, createStore} from "redux";
+import authReducer from "./auth/auth-reducer";
+import {configureStore} from "@reduxjs/toolkit";
 
 
-let reducersList = combineReducers({
-    authorization: authorizationReducer,
+const preloadedState = {
+    auth: {
+        errors: {
+            email: '',
+            password: '',
+        },
+        emailIsValid: false,
+        passwordIsValid: false,
+        loggedIn: false,
+    }
+}
+
+
+const store = configureStore({
+    reducer: {
+        auth: authReducer
+    },
+    preloadedState
 })
-
-let store = createStore(reducersList)
 
 window.store = store;
 

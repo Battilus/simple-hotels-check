@@ -1,22 +1,22 @@
 import React from "react";
 import './App.scss';
 import {Route, Redirect, Switch} from "react-router-dom"
-import Authorization from "./components/Authorization/AuthorizationContainer";
+import Auth from "./components/Auth/Auth";
 import {useSelector} from "react-redux";
-import Hotels from "./components/Hotels/HotelsContainer";
+import Hotels from "./components/Hotels/Hotels";
 
 
-const App = (state) => {
+const App = () => {
 
-    let loggedIn = useSelector(state => state.authorization.loggedIn);
+    let loggedIn = useSelector(state => state.auth.loggedIn);
 
     return (
         <div className="App">
             {loggedIn ?
                 <Redirect to={"/hotels"}/> :
-                <Redirect to={"/authorization"}/>}
+                <Redirect to={"/auth"}/>}
             <Switch>
-                <Route path="/authorization" render={() => <Authorization/>}/>
+                <Route path="/auth" render={() => <Auth/>}/>
                 <Route path="/hotels" render={() => <Hotels />}/>
             </Switch>
         </div>

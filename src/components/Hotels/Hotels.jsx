@@ -1,11 +1,15 @@
 import React from "react";
 import style from "./hotels.module.scss"
+import {useDispatch} from "react-redux";
+import {signOut} from "../../redux/auth/auth-actions";
 
 
-const NwrpHotels = (props) => {
+const Hotels = () => {
+
+    const dispatch = useDispatch()
 
     const logOut = () => {
-        props.signOut();
+        dispatch(signOut());
     }
 
     return (
@@ -17,4 +21,4 @@ const NwrpHotels = (props) => {
 }
 
 
-export default NwrpHotels;
+export default Hotels;
