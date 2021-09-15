@@ -30,7 +30,7 @@ const Auth = () => {
                     <input
                         type="Email"
                         placeholder="Email"
-                        autoComplete="on"
+                        autoComplete="email"
                         ref={userEmailDat}
                     />
                     {!emailIsValid ? <span>{errors.email}</span> : null}
@@ -39,7 +39,7 @@ const Auth = () => {
                     <input
                         type="password"
                         placeholder="Password"
-                        autoComplete="on"
+                        autoComplete="new-password current-password"
                         ref={userPasswordDat}
                     />
                     {!passwordIsValid ? <span>{errors.password}</span> : null}

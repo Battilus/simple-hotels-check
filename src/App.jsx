@@ -8,7 +8,7 @@ import Hotels from "./components/Hotels/Hotels";
 
 const App = () => {
 
-    let loggedIn = useSelector(state => state.auth.loggedIn);
+    const loggedIn = useSelector(state => state.auth.loggedIn);
 
     return (
         <div className="App">

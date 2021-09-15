@@ -1,7 +1,12 @@
-// import {combineReducers, createStore} from "redux";
 import authReducer from "./auth/auth-reducer";
-import {configureStore} from "@reduxjs/toolkit";
+import {configureStore, getDefaultMiddleware} from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga"
+import {hotelsWatcher} from "./saga/hotelsSaga";
+import hotelsReducer from "./hotels/hotels-reducer";
 
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 const preloadedState = {
     auth: {
@@ -11,17 +16,32 @@ const preloadedState = {
         },
         emailIsValid: false,
         passwordIsValid: false,
-        loggedIn: false,
+        loggedIn: true,
+    },
+    hotels: {
+        crutchFstUpdate: false,
+        fetchingStatus: false,
+        items: [],
+        errorMessage: '',
+        filter: {
+            location: '',
+            checkInDate: '',
+            checkOutDate: '',
+            livingDaysNum: '',
+        },
     }
 }
 
-
 const store = configureStore({
     reducer: {
-        auth: authReducer
+        auth: authReducer,
+        hotels: hotelsReducer
     },
+    middleware,
     preloadedState
 })
+
+sagaMiddleware.run(hotelsWatcher);
 
 window.store = store;
 
