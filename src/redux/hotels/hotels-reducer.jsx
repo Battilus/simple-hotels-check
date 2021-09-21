@@ -4,8 +4,9 @@ import {
     fstCrutchUpdate,
     setHotelsToStore,
     setLoadBar,
+    updateCheckOutData,
     updateDateField,
-    updateDaysNum,
+    updateDaysNum, updatePrevDaysNum,
     updateLocation
 } from "./hotels-actions";
 
@@ -19,13 +20,14 @@ const hotelsReducer = createReducer({}, builder => {
                 location: 'Москва',
                 livingDaysNum: '1',
                 checkInDate: '',
-                checkOutDate: ''
+                checkOutDate: '',
+                prevDaysNum: '1'
             }
         }
 
         tmpState.filter.checkInDate = new Date().toISOString().slice(0, 10).replace(/-/g, "-")
         let date = new Date(tmpState.filter.checkInDate)
-        date.setDate(date.getDate() + parseInt('1'))
+        date.setDate(date.getDate() + parseInt(tmpState.filter.livingDaysNum))
         tmpState.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
 
         return tmpState
@@ -43,14 +45,21 @@ const hotelsReducer = createReducer({}, builder => {
     builder.addCase(updateDateField, (state, action) => {
         state.filter.checkInDate = action.payload.checkInDate
     })
-    builder.addCase(updateDaysNum, (state, action) => {
+    builder.addCase(updateCheckOutData, (state, action) => {
         let date = new Date(action.payload.checkIn)
-        date.setDate(date.getDate() + parseInt(action.payload.daysNum))
+        let days = (action.payload.daysNum === "" || action.payload.daysNum === 0)? 1 : action.payload.daysNum
+        date.setDate(date.getDate() + parseInt(days))
         state.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
-        state.filter.livingDaysNum = action.payload.daysNum
+    })
+    builder.addCase(updateDaysNum, (state, action) => {
+        let days = (action.payload.daysNum === "" || action.payload.daysNum === 0)? 1 : action.payload.daysNum
+        state.filter.livingDaysNum = days
+    })
+    builder.addCase(updatePrevDaysNum, (state, action) => {
+        state.filter.prevDaysNum = action.payload.prevDaysNum
     })
     builder.addCase(setHotelsToStore, (state,action) => {
-        console.log(action.payload)
+        // console.log("from reducer", action.payload)
         if (action.payload.status === "error") {
             state.errorMessage = action.payload.message
         } else {

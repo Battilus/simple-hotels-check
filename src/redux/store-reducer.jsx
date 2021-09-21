@@ -28,6 +28,7 @@ const preloadedState = {
             checkInDate: '',
             checkOutDate: '',
             livingDaysNum: '',
+            prevDaysNum: '1',
         },
     }
 }

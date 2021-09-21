@@ -1,30 +1,29 @@
 import {put, takeEvery, call} from "redux-saga/effects"
-import {asyncGetHotels, errorHandler, setHotelsToStore, setLoadBar} from "../hotels/hotels-actions";
+import {asyncGetHotels, errorHandler, setHotelsToStore, setLoadBar, updatePrevDaysNum} from "../hotels/hotels-actions";
+import axios from "axios";
 
 
-let fetchData = {
-    location: 'Москва',
-    checkIn: '2021-09-14',
-    checkOut: '2021-09-20'
-}
+let fetchUrl = 'http://engine.hotellook.com/api/v2/cache.json'
 
-const fetchHotelsFromApi = (data=fetchData) =>
-    fetch('http://engine.hotellook.com/api/v2/cache.json?location='+data.location+
-        '&currency=rub&checkIn='+data.checkIn+
-        '&checkOut='+data.checkOut+''
-    )
-// const fetchHotelsFromApi = () => fetch('http://engine.hotellook.com/api/v2/cache.json')
-
-function* fetchHotelsWorker() {
+function* fetchHotelsWorker(action) {
     try {
-        yield put(setLoadBar({status:true}))
-        const hotelsData = yield call(fetchHotelsFromApi)
-        const hotelsJson = yield call(() => new Promise(res => res(hotelsData.json())))
-        yield put(setHotelsToStore(hotelsJson))
-        yield put(setLoadBar({status:false}))
-    }
-    catch(error) {
-        yield put(setLoadBar({status:false}))
+        yield put(setLoadBar({status: true}))
+        const {data}= yield call(
+            axios.get,
+            fetchUrl,
+            {
+                params:{
+                    location: action.payload.location,
+                    checkIn: action.payload.checkIn,
+                    checkOut: action.payload.checkOut
+                }
+            })
+        // console.log('From request', hotelsData)
+        yield put(setHotelsToStore(data))
+        yield put(updatePrevDaysNum({prevDaysNum: action.payload.prevDaysNum}))
+        yield put(setLoadBar({status: false}))
+    } catch (error) {
+        yield put(setLoadBar({status: false}))
         yield put(errorHandler(error))
     }
 }

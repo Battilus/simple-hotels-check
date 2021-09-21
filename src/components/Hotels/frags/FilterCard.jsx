@@ -2,8 +2,7 @@ import React, {useEffect} from "react";
 import style from "../hotels.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {
-    asyncGetHotels,
-    fstCrutchUpdate,
+    asyncGetHotels, updateCheckOutData,
     updateDateField,
     updateDaysNum,
     updateLocation
@@ -14,23 +13,22 @@ import RecTextField from "../../../feauters/hotels/CmInputField";
 const FilterCard = () => {
 
     const crutchUpdater = useSelector(state => state.hotels.crutchFstUpdate)
+
     const location = useSelector(state => state.hotels.filter.location)
     const checkInDate = useSelector(state => state.hotels.filter.checkInDate)
+    const checkOutDate = useSelector(state => state.hotels.filter.checkOutDate)
     const livingDaysNum = useSelector(state => state.hotels.filter.livingDaysNum)
-    // const checkOutDate = useSelector(state => state.hotels.filter.checkOutDate)
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        // Не уверен что правильно так делать, но пока пусть будет костыль
-        if (!crutchUpdater) {
-            // callFilter()
-            dispatch(fstCrutchUpdate())
-        }
-    })
-
     const callFilter = () => {
-        dispatch(asyncGetHotels())
+        dispatch(asyncGetHotels(
+            {
+                location: location,
+                checkIn: checkInDate,
+                checkOut: checkOutDate,
+                prevDaysNum: livingDaysNum
+            }))
     }
 
     const callUpdateLocation = (e) => {
@@ -41,7 +39,7 @@ const FilterCard = () => {
 
     const callUpdateCheckInDate = (e) => {
         dispatch(updateDateField({
-            arrivalDate: e.target.value
+            checkInDate: e.target.value
         }))
     }
 
@@ -51,6 +49,20 @@ const FilterCard = () => {
             daysNum: e.target.value
         }))
     }
+
+    useEffect(() => {
+        const callUpdateCheckOutDate = (inData, days) => {
+            dispatch(updateCheckOutData(
+                {
+                    checkIn: inData,
+                    daysNum: days
+                }))
+        }
+
+        if (crutchUpdater) {
+            callUpdateCheckOutDate(checkInDate, livingDaysNum)
+        }
+    }, [checkInDate, livingDaysNum, crutchUpdater, dispatch])
 
     return (
         <div className={style.filter}>

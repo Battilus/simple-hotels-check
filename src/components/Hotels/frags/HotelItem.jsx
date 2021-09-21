@@ -1,5 +1,6 @@
 import React from "react";
 import style from "../hotels.module.scss"
+import { Rating } from '@mui/material';
 
 
 const HotelItem = (props) => {
@@ -10,7 +11,7 @@ const HotelItem = (props) => {
                 <p>{props.checkInDate} - {props.livingDays} Дней</p>
             </div>
             <div>
-                <p>{props.stars}</p>
+                <Rating name="hotel-item-rating" value={props.stars} readOnly />
                 <p>Price: <b>{props.price}₽</b></p>
             </div>
         </div>

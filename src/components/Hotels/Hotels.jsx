@@ -1,19 +1,29 @@
-import React from "react";
+import React, {useEffect} from "react";
 import style from "./hotels.module.scss"
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {signOut} from "../../redux/auth/auth-actions";
 import FilterCard from "./frags/FilterCard";
 import FavoritesCard from "./frags/FavoritesCard";
 import HotelsCard from "./frags/HotelsCard";
+import {fstCrutchUpdate} from "../../redux/hotels/hotels-actions";
 
 
 const Hotels = () => {
 
+    const crutchUpdater = useSelector(state => state.hotels.crutchFstUpdate)
     const dispatch = useDispatch()
 
     const logOut = () => {
         dispatch(signOut());
     }
+
+    useEffect(() => {
+        // Не уверен что правильно так делать, но пока пусть будет костыль
+        if (!crutchUpdater) {
+            // callFilter()
+            dispatch(fstCrutchUpdate())
+        }
+    })
 
     return (
         <div className={style.wrapper}>
