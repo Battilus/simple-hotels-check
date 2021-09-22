@@ -167,9 +167,24 @@
       min-width: 664px;
       min-height: 902px;
 
+      .hotelsBody {
+
+        &Scroller {
+          width: 1066px;
+          height: 600px;
+          overflow:auto;
+        }
+      }
+
       .item {
         border-bottom: 2px solid rgba(135, 135, 135, 0.2);
         border-radius: 8px;
+
+        a {
+          text-decoration: none;
+          color: black;
+          outline: none;
+        }
       }
 
       .imageSlider {

@@ -47,12 +47,16 @@ const hotelsReducer = createReducer({}, builder => {
     })
     builder.addCase(updateCheckOutData, (state, action) => {
         let date = new Date(action.payload.checkIn)
-        let days = (action.payload.daysNum === "" || action.payload.daysNum === 0)? 1 : action.payload.daysNum
+        let days = (action.payload.daysNum === "" ||
+            action.payload.daysNum === 0 ||
+            !/^[0-9]+$/.test(action.payload.daysNum))? 1 : action.payload.daysNum
         date.setDate(date.getDate() + parseInt(days))
         state.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
     })
     builder.addCase(updateDaysNum, (state, action) => {
-        let days = (action.payload.daysNum === "" || action.payload.daysNum === 0)? 1 : action.payload.daysNum
+        let days = (action.payload.daysNum === "" ||
+            action.payload.daysNum === "0" ||
+            !/^[0-9]+$/.test(action.payload.daysNum))? 1 : action.payload.daysNum
         state.filter.livingDaysNum = days
     })
     builder.addCase(updatePrevDaysNum, (state, action) => {

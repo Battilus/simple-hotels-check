@@ -50,6 +50,10 @@ const FilterCard = () => {
         }))
     }
 
+    // useEffect(() => {
+    //     if(!crutchUpdater) callFilter()
+    // })
+
     useEffect(() => {
         const callUpdateCheckOutDate = (inData, days) => {
             dispatch(updateCheckOutData(
@@ -59,6 +63,7 @@ const FilterCard = () => {
                 }))
         }
 
+        //Еще один костыль (без него хук срабатывает впервый раз раньше, чем загрузятся дефолтные данные и ожидаемо все дропает)
         if (crutchUpdater) {
             callUpdateCheckOutDate(checkInDate, livingDaysNum)
         }

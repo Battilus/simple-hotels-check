@@ -1,6 +1,8 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import style from "./style.module.scss"
+import {makeStyles} from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
 
 const useStylesGreen = makeStyles((theme) => ({
     root: {
@@ -24,26 +26,28 @@ const GreenCircularProgress = (props) => {
     const classes = useStylesGreen();
 
     return (
-        <div className={classes.root}>
-            <CircularProgress
-                variant="determinate"
-                className={classes.bottom}
-                size={40}
-                thickness={4}
-                {...props}
-                value={100}
-            />
-            <CircularProgress
-                variant="indeterminate"
-                disableShrink
-                className={classes.top}
-                classes={{
-                    circle: classes.circle
-                }}
-                size={40}
-                thickness={4}
-                {...props}
-            />
+        <div className={style.circularProgress}>
+            <div className={classes.root}>
+                <CircularProgress
+                    variant="determinate"
+                    className={classes.bottom}
+                    size={40}
+                    thickness={4}
+                    {...props}
+                    value={100}
+                />
+                <CircularProgress
+                    variant="indeterminate"
+                    disableShrink
+                    className={classes.top}
+                    classes={{
+                        circle: classes.circle
+                    }}
+                    size={40}
+                    thickness={4}
+                    {...props}
+                />
+            </div>
         </div>
     );
 }

@@ -8,6 +8,7 @@ let fetchUrl = 'http://engine.hotellook.com/api/v2/cache.json'
 function* fetchHotelsWorker(action) {
     try {
         yield put(setLoadBar({status: true}))
+        yield put(updatePrevDaysNum({prevDaysNum: action.payload.prevDaysNum}))
         const {data}= yield call(
             axios.get,
             fetchUrl,
@@ -20,7 +21,6 @@ function* fetchHotelsWorker(action) {
             })
         // console.log('From request', hotelsData)
         yield put(setHotelsToStore(data))
-        yield put(updatePrevDaysNum({prevDaysNum: action.payload.prevDaysNum}))
         yield put(setLoadBar({status: false}))
     } catch (error) {
         yield put(setLoadBar({status: false}))

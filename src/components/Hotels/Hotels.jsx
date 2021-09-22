@@ -2,9 +2,9 @@ import React, {useEffect} from "react";
 import style from "./hotels.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {signOut} from "../../redux/auth/auth-actions";
-import FilterCard from "./frags/FilterCard";
-import FavoritesCard from "./frags/FavoritesCard";
-import HotelsCard from "./frags/HotelsCard";
+import FilterCard from "./HotelFilter/FilterCard";
+import FavoritesCard from "./HotelFavorites/FavoritesCard";
+import HotelsCard from "./HotelCard/HotelsCard";
 import {fstCrutchUpdate} from "../../redux/hotels/hotels-actions";
 
 
@@ -20,7 +20,6 @@ const Hotels = () => {
     useEffect(() => {
         // Не уверен что правильно так делать, но пока пусть будет костыль
         if (!crutchUpdater) {
-            // callFilter()
             dispatch(fstCrutchUpdate())
         }
     })
