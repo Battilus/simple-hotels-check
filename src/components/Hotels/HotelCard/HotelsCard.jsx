@@ -1,7 +1,7 @@
 import React from "react";
 import style from "../hotels.module.scss"
 import {useSelector} from "react-redux";
-import GreenCircularProgress from "../../../feauters/hotels/GreenCircularProgressBar";
+import GreenCircularProgress from "../../../feauters/UI/hotels/GreenCircularProgressBar";
 import HotelsBody from "./HotelsBody";
 
 

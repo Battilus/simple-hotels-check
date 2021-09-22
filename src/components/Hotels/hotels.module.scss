@@ -173,6 +173,10 @@
           width: 1066px;
           height: 600px;
           overflow:auto;
+
+          .error {
+            color: red;
+          }
         }
       }
 

@@ -7,8 +7,9 @@ import {
     updateCheckOutData,
     updateDateField,
     updateDaysNum, updatePrevDaysNum,
-    updateLocation
+    updateLocation, setHotelPhotosIDToStore
 } from "./hotels-actions";
+import {fetchHotelsPhotos} from "../../Api/hotelsApi";
 
 
 const hotelsReducer = createReducer({}, builder => {
@@ -36,8 +37,8 @@ const hotelsReducer = createReducer({}, builder => {
         state.fetchingStatus = action.payload.status
     })
     builder.addCase(errorHandler, (state, action) => {
-        console.log(action.payload.message)
         state.errorMessage = action.payload.message
+        state.requestStatus = 'error'
     })
     builder.addCase(updateLocation, (state, action) => {
         state.filter.location = action.payload.location
@@ -49,33 +50,35 @@ const hotelsReducer = createReducer({}, builder => {
         let date = new Date(action.payload.checkIn)
         let days = (action.payload.daysNum === "" ||
             action.payload.daysNum === 0 ||
-            !/^[0-9]+$/.test(action.payload.daysNum))? 1 : action.payload.daysNum
+            !/^[0-9]+$/.test(action.payload.daysNum)) ? 1 : action.payload.daysNum
         date.setDate(date.getDate() + parseInt(days))
         state.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
     })
     builder.addCase(updateDaysNum, (state, action) => {
         let days = (action.payload.daysNum === "" ||
             action.payload.daysNum === "0" ||
-            !/^[0-9]+$/.test(action.payload.daysNum))? 1 : action.payload.daysNum
+            !/^[0-9]+$/.test(action.payload.daysNum)) ? 1 : action.payload.daysNum
         state.filter.livingDaysNum = days
     })
     builder.addCase(updatePrevDaysNum, (state, action) => {
         state.filter.prevDaysNum = action.payload.prevDaysNum
     })
-    builder.addCase(setHotelsToStore, (state,action) => {
+    builder.addCase(setHotelsToStore, (state, action) => {
         // console.log("from reducer", action.payload)
-        if (action.payload.status === "error") {
-            state.errorMessage = action.payload.message
-        } else {
-            state.items = action.payload.map(item => {
-                return {
-                    id: item.hotelId,
-                    hotelName: item.hotelName,
-                    stars: item.stars,
-                    priceAvg: item.priceAvg,
-                }
-            })
-        }
+        state.items = action.payload.map(item => {
+            return {
+                id: item.hotelId,
+                hotelName: item.hotelName,
+                stars: item.stars,
+                priceAvg: item.priceAvg,
+            }
+        })
+        state.requestStatus = 'done'
+    })
+    builder.addCase(setHotelPhotosIDToStore, (state, action) => {
+        state.photosID = action.payload.data[action.payload.hotelID].map(item =>
+            fetchHotelsPhotos(item)
+        )
     })
 })
 

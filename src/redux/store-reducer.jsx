@@ -22,6 +22,8 @@ const preloadedState = {
         crutchFstUpdate: false,
         fetchingStatus: false,
         items: [],
+        photosID: {},
+        requestStatus: '',
         errorMessage: '',
         filter: {
             location: '',

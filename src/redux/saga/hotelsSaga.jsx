@@ -1,9 +1,17 @@
 import {put, takeEvery, call} from "redux-saga/effects"
-import {asyncGetHotels, errorHandler, setHotelsToStore, setLoadBar, updatePrevDaysNum} from "../hotels/hotels-actions";
+import {
+    asyncGetHotelPhotosID,
+    asyncGetHotels,
+    errorHandler,
+    setHotelPhotosIDToStore,
+    setHotelsToStore,
+    setLoadBar,
+    updatePrevDaysNum
+} from "../hotels/hotels-actions";
 import axios from "axios";
+import {fetchHotels, fetchHotelsPhotosID} from "../../Api/hotelsApi";
 
 
-let fetchUrl = 'http://engine.hotellook.com/api/v2/cache.json'
 
 function* fetchHotelsWorker(action) {
     try {
@@ -11,7 +19,7 @@ function* fetchHotelsWorker(action) {
         yield put(updatePrevDaysNum({prevDaysNum: action.payload.prevDaysNum}))
         const {data}= yield call(
             axios.get,
-            fetchUrl,
+            fetchHotels(),
             {
                 params:{
                     location: action.payload.location,
@@ -28,7 +36,24 @@ function* fetchHotelsWorker(action) {
     }
 }
 
+function* fetchHotelsPhotosWorker(action) {
+    try {
+        const {data} = yield call(
+            axios.get,
+            fetchHotelsPhotosID(),
+            {
+                params: {
+                    id: action.payload.hotel_id
+                }
+            })
+        yield put(setHotelPhotosIDToStore({data:data, hotelID:action.payload.hotel_id}))
+    } catch (error) {
+        yield put(errorHandler(error))
+    }
+}
+
 
 export function* hotelsWatcher() {
     yield takeEvery(asyncGetHotels.type, fetchHotelsWorker)
+    yield takeEvery(asyncGetHotelPhotosID.type, fetchHotelsPhotosWorker)
 }

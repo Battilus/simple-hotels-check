@@ -6,6 +6,8 @@ export const setLoadBar = createAction('SET_LOAD_BAR')
 export const errorHandler = createAction('REQUEST_ERROR_HANDLER')
 export const asyncGetHotels = createAction('ASYNC_GET_HOTELS')
 export const setHotelsToStore = createAction('SET_HOTELS_TO_STORE')
+export const asyncGetHotelPhotosID = createAction('ASYNC_GET_HOTEL_PHOTOS_ID')
+export const setHotelPhotosIDToStore = createAction('ASYNC_SET_HOTEL_PHOTOS_TO_STORE')
 
 export const fstCrutchUpdate = createAction('FIRST_CRUTCH_UPDATE')
 
