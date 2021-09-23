@@ -27,7 +27,7 @@ const ImageSlider = (props) => {
 
     return (
         <div className={style.imageSlider}>
-            {photosUrls}
+            {/*{photosUrls}*/}
         </div>
     )
 }

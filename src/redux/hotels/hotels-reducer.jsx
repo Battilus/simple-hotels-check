@@ -64,7 +64,6 @@ const hotelsReducer = createReducer({}, builder => {
         state.filter.prevDaysNum = action.payload.prevDaysNum
     })
     builder.addCase(setHotelsToStore, (state, action) => {
-        // console.log("from reducer", action.payload)
         state.items = action.payload.map(item => {
             return {
                 id: item.hotelId,
@@ -82,11 +81,10 @@ const hotelsReducer = createReducer({}, builder => {
         )
     })
     builder.addCase(addToFavorites, (state, action) => {
-        // debugger
         state.favorites.push(action.payload.hotelItem)
     })
     builder.addCase(removeFromFavorites, (state, action) => {
-        state.favorites = state.favorites.filter((hotel, id) => id !== action.payload.hotelItem.id)
+        state.favorites = state.favorites.filter((item) => item.id !== action.payload.hotelItem.id)
     })
 })
 

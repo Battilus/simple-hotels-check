@@ -22,7 +22,9 @@ const FavoritesCard = () => {
     return (
         <div className={style.favorites}>
             <h1>Favorites</h1>
-            {hotelsItems}
+            <div className={style.favoritesScroller}>
+                {hotelsItems}
+            </div>
         </div>
     )
 }

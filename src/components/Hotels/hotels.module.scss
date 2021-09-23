@@ -150,6 +150,12 @@
 
       min-width: 296px;
       min-height: 472px;
+
+      &Scroller {
+        width: 296px;
+        height: 472px;
+        overflow: auto;
+      }
     }
 
     .hotels {
