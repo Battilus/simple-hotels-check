@@ -7,21 +7,27 @@ import {asyncGetHotelPhotosID} from "../../../redux/hotels/hotels-actions";
 
 const ImageSlider = (props) => {
 
-    // const photosIdBox = useSelector(state => state.hotels.photosID)
+    const photosIdBox = useSelector(state => state.hotels.photosID)
 
-    let { id } = useParams();
+    let {id} = useParams();
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (id !== '') {
-            dispatch(asyncGetHotelPhotosID({hotel_id:id}))
+            dispatch(asyncGetHotelPhotosID({hotel_id: id}))
         }
-    },[id, dispatch])
+    }, [id, dispatch])
+
+
+    let photosUrls = (photosIdBox !== undefined) ?
+        (Object.keys(photosIdBox).length > 1) ?
+            photosIdBox.map(item => <img key={item.id} src={item} alt='some item'/>) :
+            <img src={photosIdBox} alt='some item'/> :
+        null
 
     return (
         <div className={style.imageSlider}>
-            <p>Slider</p>
-            <h3>ID: {id}</h3>
+            {photosUrls}
         </div>
     )
 }

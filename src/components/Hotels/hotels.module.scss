@@ -177,18 +177,18 @@
           .error {
             color: red;
           }
+
+          a {
+            text-decoration: none;
+            color: black;
+            outline: none;
+          }
         }
       }
 
       .item {
         border-bottom: 2px solid rgba(135, 135, 135, 0.2);
         border-radius: 8px;
-
-        a {
-          text-decoration: none;
-          color: black;
-          outline: none;
-        }
       }
 
       .imageSlider {

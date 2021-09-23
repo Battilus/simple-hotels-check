@@ -21,8 +21,6 @@ const preloadedState = {
     hotels: {
         crutchFstUpdate: false,
         fetchingStatus: false,
-        items: [],
-        photosID: {},
         requestStatus: '',
         errorMessage: '',
         filter: {
@@ -32,6 +30,9 @@ const preloadedState = {
             livingDaysNum: '',
             prevDaysNum: '1',
         },
+        items: [],
+        photosID: {},
+        favorites: [],
     }
 }
 

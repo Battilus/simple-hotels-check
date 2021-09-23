@@ -6,8 +6,12 @@ import {
     setLoadBar,
     updateCheckOutData,
     updateDateField,
-    updateDaysNum, updatePrevDaysNum,
-    updateLocation, setHotelPhotosIDToStore
+    updateDaysNum,
+    updatePrevDaysNum,
+    updateLocation,
+    setHotelPhotosIDToStore,
+    addToFavorites,
+    removeFromFavorites
 } from "./hotels-actions";
 import {fetchHotelsPhotos} from "../../Api/hotelsApi";
 
@@ -15,23 +19,20 @@ import {fetchHotelsPhotos} from "../../Api/hotelsApi";
 const hotelsReducer = createReducer({}, builder => {
     builder.addCase(fstCrutchUpdate, (state, action) => {
 
-        let tmpState = {
-            crutchFstUpdate: true,
-            filter: {
-                location: 'Москва',
+        let checkInDate = new Date().toISOString().slice(0, 10).replace(/-/g, "-")
+        let date = new Date(checkInDate)
+        date.setDate(date.getDate() + parseInt('1'))
+        let checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
+
+        state.filter = {
+            location: 'Москва',
                 livingDaysNum: '1',
-                checkInDate: '',
-                checkOutDate: '',
+                checkInDate: checkInDate,
+                checkOutDate: checkOutDate,
                 prevDaysNum: '1'
-            }
         }
+        state.crutchFstUpdate = true
 
-        tmpState.filter.checkInDate = new Date().toISOString().slice(0, 10).replace(/-/g, "-")
-        let date = new Date(tmpState.filter.checkInDate)
-        date.setDate(date.getDate() + parseInt(tmpState.filter.livingDaysNum))
-        tmpState.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
-
-        return tmpState
     })
     builder.addCase(setLoadBar, (state, action) => {
         state.fetchingStatus = action.payload.status
@@ -55,10 +56,9 @@ const hotelsReducer = createReducer({}, builder => {
         state.filter.checkOutDate = date.toISOString().slice(0, 10).replace(/-/g, "-")
     })
     builder.addCase(updateDaysNum, (state, action) => {
-        let days = (action.payload.daysNum === "" ||
+        state.filter.livingDaysNum = (action.payload.daysNum === "" ||
             action.payload.daysNum === "0" ||
             !/^[0-9]+$/.test(action.payload.daysNum)) ? 1 : action.payload.daysNum
-        state.filter.livingDaysNum = days
     })
     builder.addCase(updatePrevDaysNum, (state, action) => {
         state.filter.prevDaysNum = action.payload.prevDaysNum
@@ -71,6 +71,7 @@ const hotelsReducer = createReducer({}, builder => {
                 hotelName: item.hotelName,
                 stars: item.stars,
                 priceAvg: item.priceAvg,
+                favorite: false,
             }
         })
         state.requestStatus = 'done'
@@ -79,6 +80,13 @@ const hotelsReducer = createReducer({}, builder => {
         state.photosID = action.payload.data[action.payload.hotelID].map(item =>
             fetchHotelsPhotos(item)
         )
+    })
+    builder.addCase(addToFavorites, (state, action) => {
+        // debugger
+        state.favorites.push(action.payload.hotelItem)
+    })
+    builder.addCase(removeFromFavorites, (state, action) => {
+        state.favorites = state.favorites.filter((hotel, id) => id !== action.payload.hotelItem.id)
     })
 })
 

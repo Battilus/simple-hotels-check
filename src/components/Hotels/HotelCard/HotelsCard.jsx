@@ -8,7 +8,6 @@ import HotelsBody from "./HotelsBody";
 const HotelsCard = () => {
 
     const fetching = useSelector(state => state.hotels.fetchingStatus)
-    // console.log("fetching:",fetching)
 
     return (
         <div className={style.hotels}>

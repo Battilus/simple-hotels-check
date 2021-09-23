@@ -17,3 +17,6 @@ export const updateDaysNum = createAction('UPDATE_DAYS_NUM')
 export const updatePrevDaysNum = createAction('UPDATE_PREV_DAYS_NUM')
 export const updateCheckOutData = createAction('UPDATE_CHECKOUT_DATA')
 export const callFilterData = createAction('CALL_FILTER_DATA')
+
+export const addToFavorites = createAction('ADD_TO_FAVORITES')
+export const removeFromFavorites = createAction('REMOVE_FROM_FAVORITES')

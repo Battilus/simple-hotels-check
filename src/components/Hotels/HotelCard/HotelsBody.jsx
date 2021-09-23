@@ -3,7 +3,7 @@ import style from "../hotels.module.scss"
 import ImageSlider from "./ImagesSlider";
 import HotelItem from "./HotelItem";
 import {useSelector} from "react-redux";
-import {Route} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 
 
 const HotelsBody = () => {
@@ -18,21 +18,22 @@ const HotelsBody = () => {
     const requestStatus = useSelector(state => state.hotels.requestStatus)
     const errorMessage = useSelector(state => state.hotels.errorMessage)
 
-    let hotelsItems = (hotelsFromStore !== undefined)? hotelsFromStore.map(item => <HotelItem
-        key={item.id}
-        id={item.id}
-        hotelName={item.hotelName}
-        checkInDate={checkInDate}
-        livingDays={prevDaysNum}
-        stars={item.stars}
-        price={item.priceAvg}
-    />) : null
+    let hotelsItems = (hotelsFromStore !== undefined) ?
+        hotelsFromStore.map(item =>
+            <Link to={"/hotels/" + item.id}>
+                <HotelItem
+                    key={item.id}
+                    item={item}
+                    checkInDate={checkInDate}
+                    livingDays={prevDaysNum}
+                />
+            </Link>) : null
 
     return (
         <div className={style.hotelsBody}>
             <Route path="/hotels/:id" children={<ImageSlider/>}/>
             <div className={style.hotelsBodyScroller}>
-                {(requestStatus === 'error')?
+                {(requestStatus === 'error') ?
                     <span className={style.error}>{errorMessage}</span> :
                     hotelsItems
                 }
