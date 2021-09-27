@@ -1,25 +1,16 @@
-import {withStyles} from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import {styled, TextField} from "@mui/material";
 
 
-const RecTextField = (props) => {
-    return (
-        <TextField {...props} inputProps={{ classes: { underline: props.classes.inputOverride } }} />
-    )
-}
-
-export default withStyles({
-    root: {
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#C9CACC',
-            },
-            '&:hover fieldset': {
-                borderColor: 'black',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: 'black',
-            },
+export const RecTextField = styled(TextField) ({
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: '#C9CACC',
+        },
+        '&:hover fieldset': {
+            borderColor: 'black',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'black',
         },
     },
-})(RecTextField);
+})

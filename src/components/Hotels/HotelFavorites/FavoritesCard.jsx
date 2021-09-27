@@ -6,18 +6,24 @@ import HotelItem from "../HotelCard/HotelItem";
 
 const FavoritesCard = () => {
 
-    const favoriteHotels = useSelector(state => state.hotels.favorites)
+    const favorites = useSelector(state => state.hotels.favorites)
+    const hotelsFromStore = useSelector(state => state.hotels.items)
 
     const checkInDate = useSelector(state => state.hotels.filter.checkInDate)
     const prevDaysNum = useSelector(state => state.hotels.filter.prevDaysNum)
 
-    let hotelsItems = (favoriteHotels !== undefined) ?
-        favoriteHotels.map(item => <HotelItem
+    let hotelsItems = (favorites !== undefined) ?
+        favorites.map(item => <HotelItem
             key={item.id}
             item={item}
+            hotels={hotelsFromStore}
+            favorites={favorites}
+            favorChecked={item.favorChecked}
             checkInDate={checkInDate}
             livingDays={prevDaysNum}
         />) : null
+
+    // let hotelsItems = hotelsFromStore.map(item => (item.favorChecked)? item : null)
 
     return (
         <div className={style.favorites}>
