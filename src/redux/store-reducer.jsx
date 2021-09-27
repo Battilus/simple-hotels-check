@@ -32,7 +32,6 @@ const preloadedState = {
         },
         items: [],
         photosID: {},
-        favorites: [],
     }
 }
 

@@ -81,52 +81,14 @@ const hotelsReducer = createReducer({}, builder => {
         )
     })
     builder.addCase(addToFavorites, (state, action) => {
-        let favItem = {...action.payload.hotelItem}
-        favItem.favorChecked = true
-
-        let hotelStore = action.payload.hotels.map(item => {
-            if (item.id === favItem.id) {
-                return {
-                    id: item.id,
-                    hotelName: item.hotelName,
-                    stars: item.stars,
-                    priceAvg: item.priceAvg,
-                    favorChecked: true,
-                }
-            } else {
-                return item
-            }
-        })
-
-        state.items = hotelStore
-
-        if (Object.keys(action.payload.favorites).length < 1) {
-            state.favorites.push(favItem)
-        } else if (!action.payload.favorites.every( el => el.id === favItem.id)) {
-            state.favorites.push(favItem)
-        }
+        state.items = action.payload.hotels.map(item =>
+            (item.id === action.payload.favorId)? {...item, favorChecked: true} : item
+        )
     })
     builder.addCase(removeFromFavorites, (state, action) => {
-        let favItem = {...action.payload.hotelItem}
-        favItem.favorChecked = false
-
-        let hotelStore = action.payload.hotels.map(item => {
-            if (item.id === favItem.id) {
-                return {
-                    id: item.id,
-                    hotelName: item.hotelName,
-                    stars: item.stars,
-                    priceAvg: item.priceAvg,
-                    favorChecked: false,
-                }
-            } else {
-                return item
-            }
-        })
-
-        state.items = hotelStore
-
-        state.favorites = state.favorites.filter((item) => item.id !== favItem.id)
+        state.items = action.payload.hotels.map(item =>
+            (item.id === action.payload.favorId)? {...item, favorChecked: false} : item
+        )
     })
 })
 
