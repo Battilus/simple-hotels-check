@@ -7,7 +7,7 @@ import {
     updateDaysNum,
     updateLocation
 } from "../../../redux/hotels/hotels-actions";
-import {RecTextField} from "../../../feauters/UI/hotels/CmInputField";
+import {RecTextField} from "../../../feauters/UI/CmInputField";
 
 
 

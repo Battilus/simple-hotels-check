@@ -1,50 +1,61 @@
 import React from "react";
 import style from "./auth.module.scss"
 import {useDispatch, useSelector} from "react-redux";
-import {signIn} from "../../redux/auth/auth-actions";
+import {signIn, updateEmailField, updatePasswordField} from "../../redux/auth/auth-actions";
 
 
 const Auth = () => {
 
-    let errors = useSelector(state => state.auth.errors);
-    let emailIsValid = useSelector(state => state.auth.emailIsValid);
-    let passwordIsValid = useSelector(state => state.auth.passwordIsValid);
+    const userEmailField = useSelector(state => state.auth.forms.userEmail)
+    const userPasswordField = useSelector(state => state.auth.forms.userPassword)
+    const errors = useSelector(state => state.auth.errors);
+    const emailIsValid = useSelector(state => state.auth.emailIsValid);
+    const passwordIsValid = useSelector(state => state.auth.passwordIsValid);
 
     const dispatch = useDispatch()
 
-    let userEmailDat = React.createRef();
-    let userPasswordDat = React.createRef();
 
     const callSingIn = () => {
         dispatch(signIn({
-            userEmail: userEmailDat.current.value,
-            userPassword: userPasswordDat.current.value
+            userEmail: userEmailField,
+            userPassword: userPasswordField
         }));
     }
 
     return (
         <div className={style.wrapper}>
             <div className={style.imageField}>
-                <div className={style.inputField}>
-                    <div className={style.description}>Логин</div>
-                    <input
-                        type="Email"
-                        placeholder="Email"
-                        autoComplete="email"
-                        ref={userEmailDat}
-                    />
-                    {!emailIsValid ? <span>{errors.email}</span> : null}
+                <div className={style.authCard}>
+                    <div className={style.inputFields}>
+                        <div className={style.title}>Simple Hotel Check</div>
+                        <div className={style.email}>
+                            <div className={style.description}>Логин</div>
+                            <input
+                                type="Email"
+                                value={userEmailField}
+                                placeholder="Email"
+                                autoComplete="email"
+                                onChange={(e) =>
+                                    dispatch(updateEmailField({email: e.target.value}))}
+                            />
+                            {!emailIsValid ? <span>{errors.email}</span> : null}
+                        </div>
 
-                    <div className={style.description}>Пароль</div>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="new-password current-password"
-                        ref={userPasswordDat}
-                    />
-                    {!passwordIsValid ? <span>{errors.password}</span> : null}
+                        <div className={style.password}>
+                            <div className={style.description}>Пароль</div>
+                            <input
+                                type="password"
+                                value={userPasswordField}
+                                placeholder="Password"
+                                autoComplete="new-password current-password"
+                                onChange={(e) =>
+                                    dispatch(updatePasswordField({password: e.target.value}))}
+                            />
+                            {!passwordIsValid ? <span>{errors.password}</span> : null}
+                        </div>
 
-                    <button onClick={callSingIn}>Sign in</button>
+                        <button onClick={callSingIn}>Sign in</button>
+                    </div>
                 </div>
             </div>
         </div>

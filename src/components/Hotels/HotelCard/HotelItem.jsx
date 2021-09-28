@@ -24,13 +24,11 @@ const HotelItem = (props) => {
 
     const handleChange = (event) => {
         if (event.target.checked) {
-            console.log('add:', item.id)
             dispatch(addToFavorites({
                 favorId: item.id,
                 hotels: hotels
             }))
         } else if (event.target.checked === false) {
-            console.log('remove:', item.id)
             dispatch(removeFromFavorites({
                 favorId: item.id,
                 hotels: hotels

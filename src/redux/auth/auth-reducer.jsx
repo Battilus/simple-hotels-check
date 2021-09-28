@@ -1,35 +1,35 @@
 import {createReducer} from "@reduxjs/toolkit";
 import {validateUserdata} from "../../feauters/login/login";
-import {signIn, signOut} from "./auth-actions";
+import {signIn, signOut, updateEmailField, updatePasswordField} from "./auth-actions";
+import {saveLocalState} from "../local-storage";
 
 
 const authReducer = createReducer({}, builder => {
+    builder.addCase(updateEmailField, (state, action) => {
+        state.forms.userEmail = action.payload.email
+    })
+    builder.addCase(updatePasswordField, (state, action) => {
+        state.forms.userPassword = action.payload.password
+    })
     builder.addCase(signIn, (state, action) => {
         let status = validateUserdata({
                 email: action.payload.userEmail,
                 password: action.payload.userPassword
             }
         )
+        state.errors = status.errors
+        state.emailIsValid = status.emailIsValid
+        state.passwordIsValid = status.passwordIsValid
+        state.forms.userPassword = ''
+        state.loggedIn = status.isValid
         if (status.isValid) {
-            return {
-                ...state,
-                errors: status.errors,
-                emailIsValid: status.emailIsValid,
-                passwordIsValid: status.passwordIsValid,
-                loggedIn: true
-            }
-        } else {
-            return {
-                ...state,
-                errors: status.errors,
-                emailIsValid: status.emailIsValid,
-                passwordIsValid: status.passwordIsValid,
-                loggedIn: false
-            }
+            state.forms.userEmail = ''
+            saveLocalState(true, 'loggedIn')
         }
     })
     builder.addCase(signOut, (state, action) => {
-        return {...state, loggedIn: false}
+        state.loggedIn = false
+        saveLocalState(false, 'loggedIn')
     })
 })
 
