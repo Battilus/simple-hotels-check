@@ -9,8 +9,6 @@ const Auth = () => {
     const userEmailField = useSelector(state => state.auth.forms.userEmail)
     const userPasswordField = useSelector(state => state.auth.forms.userPassword)
     const errors = useSelector(state => state.auth.errors);
-    const emailIsValid = useSelector(state => state.auth.emailIsValid);
-    const passwordIsValid = useSelector(state => state.auth.passwordIsValid);
 
     const dispatch = useDispatch()
 
@@ -23,8 +21,8 @@ const Auth = () => {
     }
 
     return (
-        <div className={style.wrapper}>
-            <div className={style.imageField}>
+        <div className={style.imageField}>
+            <div className={style.wrapper}>
                 <div className={style.authCard}>
                     <div className={style.inputFields}>
                         <div className={style.title}>Simple Hotel Check</div>
@@ -38,7 +36,7 @@ const Auth = () => {
                                 onChange={(e) =>
                                     dispatch(updateEmailField({email: e.target.value}))}
                             />
-                            {!emailIsValid ? <span>{errors.email}</span> : null}
+                            <div className={style.errorText}>{errors.email}</div>
                         </div>
 
                         <div className={style.password}>
@@ -51,7 +49,7 @@ const Auth = () => {
                                 onChange={(e) =>
                                     dispatch(updatePasswordField({password: e.target.value}))}
                             />
-                            {!passwordIsValid ? <span>{errors.password}</span> : null}
+                            <div className={style.errorText}>{errors.password}</div>
                         </div>
 
                         <button onClick={callSingIn}>Sign in</button>

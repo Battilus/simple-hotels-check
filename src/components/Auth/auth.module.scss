@@ -1,122 +1,137 @@
-.wrapper {
+.imageField {
   width: 100%;
   height: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  background: url("../../assets/png/IMG_20210312_140957_174 1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(20px);
+}
 
-  //background: url("../../assets/png/IMG_20210312_140957_174 1.png");
+.wrapper {
+  width: 100%;
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.6);
 
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
 
-  .imageField {
+  .authCard {
+    width: 409px;
+    height: 382px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
 
-    .authCard {
-      width: 409px;
-      height: 382px;
-      background: #FFFFFF;
-      box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
-      border-radius: 16px;
+    .inputFields {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin: auto;
+      padding: 32px;
 
-      .inputFields {
+      .title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 28px;
         display: flex;
         align-items: center;
-        flex-direction: column;
-        margin: auto;
-        padding: 32px;
+        text-align: center;
+        color: #424242;
+        padding-bottom: 32px;
+      }
 
-        .title {
-          font-style: normal;
-          font-weight: 500;
-          font-size: 24px;
-          line-height: 28px;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          color: #424242;
-          padding-bottom: 32px;
-        }
-
-        &Error {
-          input {
-            border-color: red;
-          }
-        }
-
-        .email {
-          padding-bottom: 26px;
-        }
-
-        .password {
-          padding-bottom: 32px;
-        }
-
-        .description {
-          font-style: normal;
-          font-weight: 300;
-          font-size: 16px;
-          line-height: 19px;
-          margin-bottom: 7px;
-          align-self: baseline;
-        }
-
+      &Error {
         input {
-          width: 324px;
-          height: 44px;
-          font-style: normal;
-          font-weight: 300;
-          font-size: 16px;
-          line-height: 18px;
-          align-items: center;
-          padding-left: 15px;
-          border: 1px solid #C9CACC;
-          border-radius: 4px;
+          border-color: red;
+        }
+      }
 
-          &:hover {
-            border-color: black;
-          }
+      .email {
+        //padding-bottom: 26px;
+      }
 
-          &:active {
-            border-color: black;
-          }
+      .password {
+        padding-bottom: 8px;
+      }
+
+      .errorText {
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        color: #EB1717;
+        margin: 7px 0px;
+        height: 12px;
+      }
+
+      .description {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        margin-bottom: 7px;
+        align-self: baseline;
+      }
+
+      input {
+        width: 324px;
+        height: 44px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 18px;
+        align-items: center;
+        padding-left: 15px;
+        border: 1px solid #C9CACC;
+        border-radius: 4px;
+
+        &:hover {
+          border-color: black;
         }
 
-        button {
-          //margin-top: 32px;
-          width: 345px;
-          height: 50px;
+        &:active {
+          border-color: black;
+        }
+      }
 
-          background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
-          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
-          border-radius: 4px;
-          border: none;
+      button {
+        //margin-top: 32px;
+        width: 345px;
+        height: 50px;
 
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
+        background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        border: none;
 
-          color: #FFFFFF;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
 
-          &:hover {
-            cursor: pointer;
-          }
+        color: #FFFFFF;
 
-          &:active {
-            cursor: pointer;
-          }
+        &:hover {
+          cursor: pointer;
         }
 
-        span {
-          font-weight: 300;
-          font-size: 12px;
-          line-height: 14px;
-          color: #EB1717;
-          margin: 7px 0px;
+        &:active {
+          cursor: pointer;
         }
+      }
+
+      span {
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 14px;
+        color: #EB1717;
+        margin: 7px 0px;
       }
     }
   }

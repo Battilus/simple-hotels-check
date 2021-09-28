@@ -18,8 +18,6 @@ const authReducer = createReducer({}, builder => {
             }
         )
         state.errors = status.errors
-        state.emailIsValid = status.emailIsValid
-        state.passwordIsValid = status.passwordIsValid
         state.forms.userPassword = ''
         state.loggedIn = status.isValid
         if (status.isValid) {

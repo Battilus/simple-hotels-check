@@ -19,8 +19,6 @@ const preloadedState = {
             email: '',
             password: '',
         },
-        emailIsValid: false,
-        passwordIsValid: false,
         loggedIn: loadLocalState('loggedIn'),
     },
     hotels: {
