@@ -16,6 +16,7 @@ const HotelItem = (props) => {
         item,
         favorChecked,
         hotels,
+        favorites,
         checkInDate,
         livingDays
     } = props
@@ -23,15 +24,20 @@ const HotelItem = (props) => {
     let dispatch = useDispatch()
 
     const handleChange = (event) => {
+        console.log('click')
         if (event.target.checked) {
             dispatch(addToFavorites({
                 favorId: item.id,
-                hotels: hotels
+                hotels: hotels,
+                favorites: favorites,
+                itemToPush: item
             }))
         } else if (event.target.checked === false) {
             dispatch(removeFromFavorites({
                 favorId: item.id,
-                hotels: hotels
+                hotels: hotels,
+                favorites: favorites,
+                itemToPush: item
             }))
         }
     };

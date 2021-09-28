@@ -23,6 +23,7 @@ function* fetchHotelsWorker(action) {
             {
                 params:{
                     location: action.payload.location,
+                    currency: 'rub',
                     checkIn: action.payload.checkIn,
                     checkOut: action.payload.checkOut
                 }

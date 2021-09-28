@@ -9,6 +9,7 @@ import {Route} from "react-router-dom";
 const HotelsBody = () => {
 
     const hotelsFromStore = useSelector(state => state.hotels.items)
+    const favorites = useSelector(state => state.hotels.favorites)
 
     const checkInDate = useSelector(state => state.hotels.filter.checkInDate)
     const prevDaysNum = useSelector(state => state.hotels.filter.prevDaysNum)
@@ -22,6 +23,7 @@ const HotelsBody = () => {
                 key={item.id}
                 item={item}
                 hotels={hotelsFromStore}
+                favorites={favorites}
                 favorChecked={item.favorChecked}
                 checkInDate={checkInDate}
                 livingDays={prevDaysNum}

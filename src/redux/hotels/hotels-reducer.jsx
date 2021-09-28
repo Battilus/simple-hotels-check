@@ -64,7 +64,10 @@ const hotelsReducer = createReducer({}, builder => {
         state.filter.prevDaysNum = action.payload.prevDaysNum
     })
     builder.addCase(setHotelsToStore, (state, action) => {
-        state.items = action.payload.map(item => {
+        // state.items = action.payload.hotels.map(item =>
+        //     (item.id === action.payload.favorId)? {...item, favorChecked: true} : item
+        // )
+        let itemsBuffer = action.payload.map(item => {
             return {
                 id: item.hotelId,
                 hotelName: item.hotelName,
@@ -73,6 +76,8 @@ const hotelsReducer = createReducer({}, builder => {
                 favorChecked: false,
             }
         })
+
+        state.items = itemsBuffer
         state.requestStatus = 'done'
     })
     builder.addCase(setHotelPhotosIDToStore, (state, action) => {
@@ -81,13 +86,22 @@ const hotelsReducer = createReducer({}, builder => {
         )
     })
     builder.addCase(addToFavorites, (state, action) => {
+        let favItem = {...action.payload.itemToPush}
+        favItem.favorChecked = true
+
+        if (Object.keys(action.payload.favorites).length < 1) {
+            state.favorites.push(favItem)
+        } else if (!action.payload.favorites.every( el => el.id === favItem.id)) {
+            state.favorites.push(favItem)
+        }
         state.items = action.payload.hotels.map(item =>
             (item.id === action.payload.favorId)? {...item, favorChecked: true} : item
         )
     })
     builder.addCase(removeFromFavorites, (state, action) => {
+        state.favorites = state.favorites.filter((item) => item.id !== action.payload.itemToPush.id)
         state.items = action.payload.hotels.map(item =>
-            (item.id === action.payload.favorId)? {...item, favorChecked: false} : item
+            (item.id === action.payload.itemToPush.id)? {...item, favorChecked: false} : item
         )
     })
 })
