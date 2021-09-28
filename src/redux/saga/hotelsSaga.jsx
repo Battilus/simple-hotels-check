@@ -28,7 +28,6 @@ function* fetchHotelsWorker(action) {
                     checkOut: action.payload.checkOut
                 }
             })
-        // console.log('From request', hotelsData)
         yield put(setHotelsToStore(data))
         yield put(setLoadBar({status: false}))
     } catch (error) {

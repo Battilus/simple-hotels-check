@@ -64,9 +64,6 @@ const hotelsReducer = createReducer({}, builder => {
         state.filter.prevDaysNum = action.payload.prevDaysNum
     })
     builder.addCase(setHotelsToStore, (state, action) => {
-        // state.items = action.payload.hotels.map(item =>
-        //     (item.id === action.payload.favorId)? {...item, favorChecked: true} : item
-        // )
         let itemsBuffer = action.payload.map(item => {
             return {
                 id: item.hotelId,
@@ -77,7 +74,14 @@ const hotelsReducer = createReducer({}, builder => {
             }
         })
 
-        state.items = itemsBuffer
+        let favoritesCopy = {...state, favorites:[...state.favorites]}
+
+        state.items = itemsBuffer.map(item => {
+            for (let i in favoritesCopy.favorites) {
+                if (item.id === favoritesCopy.favorites[i].id) return {...item, favorChecked: true}
+            }
+            return item
+        })
         state.requestStatus = 'done'
     })
     builder.addCase(setHotelPhotosIDToStore, (state, action) => {

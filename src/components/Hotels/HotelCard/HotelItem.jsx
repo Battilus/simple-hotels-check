@@ -24,7 +24,6 @@ const HotelItem = (props) => {
     let dispatch = useDispatch()
 
     const handleChange = (event) => {
-        console.log('click')
         if (event.target.checked) {
             dispatch(addToFavorites({
                 favorId: item.id,
