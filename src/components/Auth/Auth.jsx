@@ -11,15 +11,7 @@ const Auth = () => {
     const errors = useSelector(state => state.auth.errors);
 
     const dispatch = useDispatch()
-
-
-    const callSingIn = () => {
-        dispatch(signIn({
-            userEmail: userEmailField,
-            userPassword: userPasswordField
-        }));
-    }
-
+    
     return (
         <div className={style.imageField}>
             <div className={style.wrapper}>
@@ -51,8 +43,14 @@ const Auth = () => {
                             />
                             <div className={style.errorText}>{errors.password}</div>
                         </div>
+                            <button type="button"
+                                onClick={() => {
+                                    dispatch(signIn({
+                                        userEmail: userEmailField,
+                                        userPassword: userPasswordField
+                                    }));
+                                }}>Sign in</button>
 
-                        <button onClick={callSingIn}>Sign in</button>
                     </div>
                 </div>
             </div>

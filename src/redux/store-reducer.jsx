@@ -23,6 +23,7 @@ const preloadedState = {
     },
     hotels: {
         crutchFstUpdate: false,
+        crutchFstFetch: false,
         fetchingStatus: false,
         requestStatus: '',
         errorMessage: '',
@@ -32,6 +33,11 @@ const preloadedState = {
             checkOutDate: '',
             livingDaysNum: '',
             prevDaysNum: '1',
+        },
+        actRequest: {
+            daysNum: '',
+            date: '',
+            location: '',
         },
         items: [],
         photosID: {},

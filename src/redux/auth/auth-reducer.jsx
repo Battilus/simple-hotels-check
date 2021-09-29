@@ -1,5 +1,5 @@
 import {createReducer} from "@reduxjs/toolkit";
-import {validateUserdata} from "../../feauters/login/login";
+import {validateUserdata} from "../../feauters/logic/login";
 import {signIn, signOut, updateEmailField, updatePasswordField} from "./auth-actions";
 import {saveLocalState} from "../local-storage";
 

@@ -6,7 +6,7 @@ import {
     setHotelPhotosIDToStore,
     setHotelsToStore,
     setLoadBar,
-    updatePrevDaysNum
+    updatePrevReqData
 } from "../hotels/hotels-actions";
 import axios from "axios";
 import {fetchHotels, fetchHotelsPhotosID} from "../../Api/hotelsApi";
@@ -16,7 +16,11 @@ import {fetchHotels, fetchHotelsPhotosID} from "../../Api/hotelsApi";
 function* fetchHotelsWorker(action) {
     try {
         yield put(setLoadBar({status: true}))
-        yield put(updatePrevDaysNum({prevDaysNum: action.payload.prevDaysNum}))
+        yield put(updatePrevReqData({
+            daysNum: action.payload.prevDaysNum,
+            date: action.payload.prevData,
+            location: action.payload.prevLocation
+        }))
         const {data}= yield call(
             axios.get,
             fetchHotels(),

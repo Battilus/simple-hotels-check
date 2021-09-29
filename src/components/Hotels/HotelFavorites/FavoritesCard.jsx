@@ -1,7 +1,8 @@
 import React from "react";
 import style from "../hotels.module.scss"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import HotelItem from "../HotelCard/HotelItem";
+import {sortFavForPrice, sortFavForRating} from "../../../redux/hotels/hotels-actions";
 
 
 const FavoritesCard = () => {
@@ -10,7 +11,9 @@ const FavoritesCard = () => {
     const favorites = useSelector(state => state.hotels.favorites)
 
     const checkInDate = useSelector(state => state.hotels.filter.checkInDate)
-    const prevDaysNum = useSelector(state => state.hotels.filter.prevDaysNum)
+    const prevDaysNum = useSelector(state => state.hotels.actRequest.daysNum)
+
+    const dispatch = useDispatch()
 
     let hotelsItems = favorites.map(item =>
         <HotelItem
@@ -25,7 +28,12 @@ const FavoritesCard = () => {
 
     return (
         <div className={style.favorites}>
-            <h1>Favorites</h1>
+            <h1>Избранное</h1>
+            <div className={style.favoritesFilterBtns}>
+                <button type="button"
+                        onClick={() => dispatch(sortFavForRating({way: 'up'}))}>Rating</button>
+                <button type="button" onClick={() => dispatch(sortFavForPrice({way: 'up'}))}>Price</button>
+            </div>
             <div className={style.favoritesScroller}>
                 {hotelsItems}
             </div>

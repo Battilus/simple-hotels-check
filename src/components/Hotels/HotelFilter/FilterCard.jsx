@@ -2,7 +2,8 @@ import React, {useEffect} from "react";
 import style from "../hotels.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {
-    asyncGetHotels, updateCheckOutData,
+    asyncGetHotels,
+    updateCheckOutData,
     updateDateField,
     updateDaysNum,
     updateLocation
@@ -14,6 +15,7 @@ import {RecTextField} from "../../../feauters/UI/CmInputField";
 const FilterCard = () => {
 
     const crutchUpdater = useSelector(state => state.hotels.crutchFstUpdate)
+    const crutchFstFetch = useSelector(state => state.hotels.crutchFstFetch)
 
     const location = useSelector(state => state.hotels.filter.location)
     const checkInDate = useSelector(state => state.hotels.filter.checkInDate)
@@ -28,7 +30,9 @@ const FilterCard = () => {
                 location: location,
                 checkIn: checkInDate,
                 checkOut: checkOutDate,
-                prevDaysNum: livingDaysNum
+                prevDaysNum: livingDaysNum,
+                prevData: checkInDate,
+                prevLocation: location
             }))
     }
 
@@ -51,9 +55,9 @@ const FilterCard = () => {
         }))
     }
 
-    // useEffect(() => {
-    //     if(!crutchUpdater) callFilter()
-    // })
+    useEffect(() => {
+        if(crutchFstFetch) callFilter()
+    })
 
     useEffect(() => {
         const callUpdateCheckOutDate = (inData, days) => {

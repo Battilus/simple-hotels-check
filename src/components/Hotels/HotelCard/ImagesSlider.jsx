@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import style from "../hotels.module.scss"
 import {useParams} from "react-router-dom"
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {asyncGetHotelPhotosID} from "../../../redux/hotels/hotels-actions";
 
 
 const ImageSlider = (props) => {
 
-    // const photosIdBox = useSelector(state => state.hotels.photosID)
+    const photosIdBox = useSelector(state => state.hotels.photosID)
 
     let {id} = useParams();
     const dispatch = useDispatch();
@@ -19,15 +19,16 @@ const ImageSlider = (props) => {
     }, [id, dispatch])
 
 
-    // let photosUrls = (photosIdBox !== undefined) ?
-    //     (Object.keys(photosIdBox).length > 1) ?
-    //         photosIdBox.map(item => <img key={item.id} src={item} alt='some item'/>) :
-    //         <img src={photosIdBox} alt='some item'/> :
-    //     null
+    let photosUrls = (photosIdBox !== undefined) ?
+        (Object.keys(photosIdBox).length > 1) ?
+            photosIdBox.map(item => <img key={item.id} src={item} alt='some item'/>) :
+            <img key={photosIdBox.id} src={photosIdBox} alt='some item'/> :
+        null
 
     return (
         <div className={style.imageSlider}>
-            {/*{photosUrls}*/}
+            {/*imageSlider*/}
+            {photosUrls}
         </div>
     )
 }

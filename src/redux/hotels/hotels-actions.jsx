@@ -14,9 +14,12 @@ export const fstCrutchUpdate = createAction('FIRST_CRUTCH_UPDATE')
 export const updateLocation = createAction('UPDATE_LOCATION')
 export const updateDateField = createAction('UPDATE_DATE_FIELD')
 export const updateDaysNum = createAction('UPDATE_DAYS_NUM')
-export const updatePrevDaysNum = createAction('UPDATE_PREV_DAYS_NUM')
+export const updatePrevReqData = createAction('UPDATE_PREV_REQUEST_DATA')
 export const updateCheckOutData = createAction('UPDATE_CHECKOUT_DATA')
 export const callFilterData = createAction('CALL_FILTER_DATA')
 
 export const addToFavorites = createAction('ADD_TO_FAVORITES')
 export const removeFromFavorites = createAction('REMOVE_FROM_FAVORITES')
+
+export const sortFavForRating = createAction('SORT_FAVORITES_FOR_RATING')
+export const sortFavForPrice = createAction('SORT_FAVORITES_FOR_PRICE')
