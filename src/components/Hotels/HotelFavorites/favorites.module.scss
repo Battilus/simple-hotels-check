@@ -1,0 +1,107 @@
+.favorites {
+  grid-area: favorites;
+
+  background-color: white;
+  box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  padding: 32px;
+
+  width: 296px;
+  height: 472px;
+
+  .head {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    color: #424242;
+  }
+  &Scroller {
+    width: 296px;
+    height: 472px;
+    overflow: auto;
+
+    .favItemWrapper {
+      display: flex;
+      flex-direction: row;
+
+      &HomeBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .item {
+        border-bottom: 2px solid rgba(135, 135, 135, 0.2);
+        //border-radius: 8px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 6px 0px;
+
+        &Left {
+
+          .hotelName {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 17px;
+            line-height: 22px;
+            letter-spacing: -0.408px;
+            color: #424242;
+          }
+          .days {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 22px;
+            letter-spacing: -0.408px;
+            color: #878787;
+          }
+        }
+        &Right {
+          display: flex;
+          flex-direction: column;
+
+          .like {
+            align-self: end;
+          }
+          .priceTxt {
+            font-style: normal;
+            font-weight: 300;
+            line-height: 1.5;
+            font-size: 11px;
+            letter-spacing: -0.408px;
+            color: #878787;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: flex-end;
+
+            span {
+              font-style: normal;
+              font-weight: 600;
+              font-size: 17px;
+              line-height: 22px;
+              text-align: right;
+              letter-spacing: -0.408px;
+              color: #424242;
+              padding-left: 6px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &FilterBtns {
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}

@@ -3,9 +3,10 @@
   .header {
     display: flex;
     align-items: center;
-    margin-left: 31px;
-    margin-right: 31px;
-    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 31px;
+    width: 97%;
     height: 92px;
 
     h2 {
@@ -42,206 +43,12 @@
     "filter hotels"
     "filter hotels"
     "favorites hotels";
-    //grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
     grid-gap: 24px;
 
     padding-left: 196px;
     padding-right: 196px;
     margin: 0 auto;
-
-    .filter {
-      grid-area: filter;
-
-      background-color: white;
-      box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-
-      align-items: flex-start;
-      padding: 32px;
-
-      width: 296px;
-      height: 356px;
-
-
-      .description {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 19px;
-
-        color: #424242;
-
-        padding-bottom: 7px;
-      }
-
-      input {
-        border: 1px solid #C9CACC;
-        box-sizing: border-box;
-        border-radius: 4px;
-        width: 296px;
-        height: 50px;
-
-        font-style: normal;
-        font-weight: 300;
-        font-size: 16px;
-        line-height: 18px;
-        align-items: center;
-        padding-left: 15px;
-
-        &:active {
-          border: 1px solid black;
-        }
-      }
-
-      .location {
-        padding-bottom: 20px;
-      }
-
-      .date {
-        padding-bottom: 20px;
-      }
-
-      .daysNumber {
-        padding-bottom: 20px;
-      }
-
-      .searchBtn {
-        button {
-          width: 296px;
-          height: 50px;
-
-          background: linear-gradient(104.34deg, #41522E -15.34%, #BE8022 145.95%);
-          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
-          border-radius: 4px;
-          border: none;
-
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-
-          color: #FFFFFF;
-
-          &:hover {
-            cursor: pointer;
-          }
-
-          &:active {
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    .favorites {
-      grid-area: favorites;
-
-      background-color: white;
-      box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-
-      align-items: flex-start;
-      padding: 32px;
-
-      min-width: 296px;
-      min-height: 472px;
-
-      &Scroller {
-        width: 296px;
-        height: 472px;
-        overflow: auto;
-      }
-
-      &FilterBtns {
-        margin-top: 32px;
-        margin-bottom: 32px;
-      }
-    }
-
-    .hotels {
-      grid-area: hotels;
-
-      background-color: white;
-      box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-
-      align-items: flex-start;
-      padding: 48px 32px;
-
-      min-width: 664px;
-      min-height: 902px;
-
-      .hotelsBody {
-
-        .breadHeader {
-          display: flex;
-          align-items: center;
-
-          .breadCrumbs{
-            font-style: normal;
-            font-weight: 500;
-            font-size: 32px;
-            line-height: 37px;
-            color: #424242;
-          }
-
-          .reqDate {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 24px;
-            line-height: 28px;
-            text-align: right;
-
-            color: #41522E;
-          }
-        }
-
-
-        .favSum {
-
-        }
-
-        &Scroller {
-          width: 1066px;
-          height: 600px;
-          overflow:auto;
-
-          .error {
-            color: red;
-          }
-
-          a {
-            text-decoration: none;
-            color: black;
-            outline: none;
-          }
-        }
-      }
-
-      .item {
-        border-bottom: 2px solid rgba(135, 135, 135, 0.2);
-        border-radius: 8px;
-      }
-
-      .imageSlider {
-        padding: 10px;
-
-        img {
-          width: 164px;
-          height: 149px;
-          margin: 6px;
-          box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.15);
-          border-radius: 10px;
-        }
-      }
-    }
   }
 }
 

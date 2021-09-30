@@ -29,7 +29,8 @@ function* fetchHotelsWorker(action) {
                     location: action.payload.location,
                     currency: 'rub',
                     checkIn: action.payload.checkIn,
-                    checkOut: action.payload.checkOut
+                    checkOut: action.payload.checkOut,
+                    limit: 10
                 }
             })
         yield put(setHotelsToStore(data))

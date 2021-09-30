@@ -1,7 +1,7 @@
 import React from "react";
-import style from "../hotels.module.scss"
+import style from "./favorites.module.scss"
 import {useDispatch, useSelector} from "react-redux";
-import HotelItem from "../HotelCard/HotelItem";
+import HotelItem from "../MultipleUsage/HotelItem";
 import {sortFavForPrice, sortFavForRating} from "../../../redux/hotels/hotels-actions";
 
 
@@ -16,23 +16,26 @@ const FavoritesCard = () => {
     const dispatch = useDispatch()
 
     let hotelsItems = favorites.map(item =>
-        <HotelItem
-            key={item.id}
-            item={item}
-            hotels={hotelsFromStore}
-            favorites={favorites}
-            favorChecked={item.favorChecked}
-            checkInDate={checkInDate}
-            livingDays={prevDaysNum}/>
+        <div key={item.id} className={style.favItemWrapper}>
+            <HotelItem
+                style={style}
+                item={item}
+                hotels={hotelsFromStore}
+                favorites={favorites}
+                favorChecked={item.favorChecked}
+                checkInDate={checkInDate}
+                livingDays={prevDaysNum}/>
+        </div>
     )
 
     return (
         <div className={style.favorites}>
-            <h1>Избранное</h1>
+            <div className={style.head}>Избранное</div>
             <div className={style.favoritesFilterBtns}>
                 <button type="button"
-                        onClick={() => dispatch(sortFavForRating({way: 'up'}))}>Rating</button>
-                <button type="button" onClick={() => dispatch(sortFavForPrice({way: 'up'}))}>Price</button>
+                        onClick={() => dispatch(sortFavForRating({direction: 'up'}))}>Rating
+                </button>
+                <button type="button" onClick={() => dispatch(sortFavForPrice({direction: 'up'}))}>Price</button>
             </div>
             <div className={style.favoritesScroller}>
                 {hotelsItems}

@@ -16,6 +16,7 @@ import {
     sortFavForPrice,
 } from "./hotels-actions";
 import {fetchHotelsPhotos} from "../../Api/hotelsApi";
+import {priceFilter, ratingFilter} from "../../feauters/logic/anyLogic";
 
 
 const hotelsReducer = createReducer({}, builder => {
@@ -93,11 +94,14 @@ const hotelsReducer = createReducer({}, builder => {
         let favItem = {...action.payload.itemToPush}
         favItem.favorChecked = true
 
+        let favBuffer = {...state, ...state.favorites}
+
         if (Object.keys(action.payload.favorites).length < 1) {
-            state.favorites.push(favItem)
+            favBuffer.favorites.push(favItem)
         } else if (!action.payload.favorites.every(el => el.id === favItem.id)) {
-            state.favorites.push(favItem)
+            favBuffer.favorites.push(favItem)
         }
+        state.favorites = ratingFilter(favBuffer.favorites, 'up')
         state.items = action.payload.hotels.map(item =>
             (item.id === action.payload.favorId) ? {...item, favorChecked: true} : item
         )
@@ -109,50 +113,10 @@ const hotelsReducer = createReducer({}, builder => {
         )
     })
     builder.addCase(sortFavForRating, (state, action) => {
-        if (action.payload.way === 'up') {
-            state.favorites = state.favorites.sort((a, b) => {
-                if (a.stars > b.stars) {
-                    return -1;
-                }
-                if (a.stars < b.stars) {
-                    return 1;
-                }
-                return 0;
-            });
-        } else {
-            state.favorites = state.favorites.sort((a, b) => {
-                if (a.stars > b.stars) {
-                    return 1;
-                }
-                if (a.stars < b.stars) {
-                    return -1;
-                }
-                return 0;
-            });
-        }
+        state.favorites = ratingFilter(state.favorites, action.payload.direction)
     })
     builder.addCase(sortFavForPrice, (state, action) => {
-        if (action.payload.way === 'up') {
-            state.favorites = state.favorites.sort((a, b) => {
-                if (a.priceAvg > b.priceAvg) {
-                    return -1;
-                }
-                if (a.priceAvg < b.priceAvg) {
-                    return 1;
-                }
-                return 0;
-            });
-        } else {
-            state.favorites = state.favorites.sort((a, b) => {
-                if (a.priceAvg > b.priceAvg) {
-                    return 1;
-                }
-                if (a.priceAvg < b.priceAvg) {
-                    return -1;
-                }
-                return 0;
-            });
-        }
+        state.favorites = priceFilter(state.favorites, action.payload.direction)
     })
 })
 

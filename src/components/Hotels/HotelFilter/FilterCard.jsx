@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import style from "../hotels.module.scss"
+import style from "./filter.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {
     asyncGetHotels,
@@ -9,7 +9,6 @@ import {
     updateLocation
 } from "../../../redux/hotels/hotels-actions";
 import {RecTextField} from "../../../feauters/UI/CmInputField";
-
 
 
 const FilterCard = () => {

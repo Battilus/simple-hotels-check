@@ -1,18 +1,15 @@
 import React from "react";
-import style from "../hotels.module.scss"
 import Rating from '@mui/material/Rating';
-import homeHotelLogo from "../../../assets/svg/HomeHotelLogo.svg"
 import {addToFavorites, removeFromFavorites} from "../../../redux/hotels/hotels-actions";
 import {useDispatch} from "react-redux";
-
 import {Favorite, FavoriteBorder} from "@material-ui/icons";
 import Checkbox from '@mui/material/Checkbox';
-import {Link} from "react-router-dom";
 
 
 const HotelItem = (props) => {
 
     const {
+        style,
         item,
         favorChecked,
         hotels,
@@ -43,36 +40,34 @@ const HotelItem = (props) => {
 
     return (
         <div className={style.item}>
-            <div>
-                <Link key={item.id} to={"/hotels/" + item.id}>
-                    <img src={homeHotelLogo} alt="Home logo"/>
-                </Link>
-            </div>
-            <div>
-                <h3>{item.hotelName}</h3>
-                <p>{checkInDate} - {livingDays} Дней</p>
+            <div className={style.itemLeft}>
+                <div className={style.hotelName}>{item.hotelName}</div>
+                <div className={style.days}>{checkInDate} - {livingDays} Дней</div>
                 <Rating
                     value={item.stars}
                     sx={{
-                        color: '#CDBC1E'
+                        color: '#CDBC1E',
                     }}
                     readOnly/>
             </div>
-            <div>
-                <Checkbox
-                    icon={<FavoriteBorder/>}
-                    checkedIcon={<Favorite/>}
-                    checked={favorChecked}
-                    sx={{
-                        color: '#E55858',
-                        '&.Mui-checked': {
+            <div className={style.itemRight}>
+                <div className={style.like}>
+                    <Checkbox
+                        icon={<FavoriteBorder/>}
+                        checkedIcon={<Favorite/>}
+                        checked={favorChecked}
+                        sx={{
                             color: '#E55858',
-                        },
-                    }}
-                    onChange={handleChange}
-                    inputProps={{'aria-label': 'controlled'}}
-                />
-                <p>Price: <b>{item.priceAvg}₽</b></p>
+                            width: '42px',
+                            '&.Mui-checked': {
+                                color: '#E55858',
+                            },
+                        }}
+                        onChange={handleChange}
+                        inputProps={{'aria-label': 'controlled'}}
+                    />
+                </div>
+                <div className={style.priceTxt}>Price: <span>{item.priceAvg}₽</span></div>
             </div>
         </div>
     )

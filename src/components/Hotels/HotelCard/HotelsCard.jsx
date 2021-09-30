@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../hotels.module.scss"
+import style from "./hotelsCard.module.scss"
 import {useSelector} from "react-redux";
 import HotelsBody from "./HotelsBody";
 import {CircularProgress} from "@mui/material";
@@ -12,7 +12,7 @@ const HotelsCard = () => {
     return (
         <div className={style.hotels}>
             {(fetching)?
-                <CircularProgress color="success" /> :
+                <div className={style.fetching}><CircularProgress color="success" /></div> :
                 <HotelsBody />
             }
         </div>

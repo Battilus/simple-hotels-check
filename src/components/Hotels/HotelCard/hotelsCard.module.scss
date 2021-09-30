@@ -1,0 +1,163 @@
+.hotels {
+  grid-area: hotels;
+
+  background-color: white;
+  box-shadow: 0px 4px 33px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  padding: 48px 32px;
+
+  min-width: 664px;
+  height: 885px;
+
+  .fetching {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .imagesSection {
+    padding: 10px;
+    height: 174px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .imageSlider {
+
+      img {
+        width: 164px;
+        height: 149px;
+        margin: 6px;
+        box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .hotelsBody {
+    width: 100%;
+
+    .breadHeader {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .breadCrumbs{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        color: #424242;
+      }
+
+      .reqDate {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: right;
+        color: #41522E;
+      }
+    }
+
+    .favSum {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 22px;
+      letter-spacing: -0.408px;
+      color: #424242;
+    }
+
+    &Scroller {
+      width: 100%;
+      height: 600px;
+      overflow:auto;
+
+      .error {
+        color: red;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+        outline: none;
+      }
+      .itemWrapper {
+        display: flex;
+        flex-direction: row;
+
+        &HomeBtn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .item {
+          border-bottom: 2px solid rgba(135, 135, 135, 0.2);
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          padding: 24px;
+
+          &Left {
+
+            .hotelName {
+              font-style: normal;
+              font-weight: 300;
+              font-size: 17px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #424242;
+            }
+            .days {
+              font-style: normal;
+              font-weight: normal;
+              font-size: 14px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #878787;
+            }
+          }
+          &Right {
+            display: flex;
+            flex-direction: column;
+
+            .like {
+              align-self: end;
+            }
+            .priceTxt {
+              font-style: normal;
+              font-weight: 300;
+              font-size: 11px;
+              line-height: 22px;
+              letter-spacing: -0.408px;
+              color: #878787;
+              flex-wrap: nowrap;
+
+              span {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 17px;
+                line-height: 22px;
+                text-align: right;
+                letter-spacing: -0.408px;
+                color: #424242;
+                padding-left: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
