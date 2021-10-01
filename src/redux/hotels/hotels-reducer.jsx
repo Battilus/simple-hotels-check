@@ -94,14 +94,11 @@ const hotelsReducer = createReducer({}, builder => {
         let favItem = {...action.payload.itemToPush}
         favItem.favorChecked = true
 
-        let favBuffer = {...state, ...state.favorites}
-
         if (Object.keys(action.payload.favorites).length < 1) {
-            favBuffer.favorites.push(favItem)
+            state.favorites.push(favItem)
         } else if (!action.payload.favorites.every(el => el.id === favItem.id)) {
-            favBuffer.favorites.push(favItem)
+            state.favorites.push(favItem)
         }
-        state.favorites = ratingFilter(favBuffer.favorites, 'up')
         state.items = action.payload.hotels.map(item =>
             (item.id === action.payload.favorId) ? {...item, favorChecked: true} : item
         )

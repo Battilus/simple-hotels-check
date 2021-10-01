@@ -4,10 +4,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: url("../../assets/png/IMG_20210312_140957_174 1.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  backdrop-filter: blur(20px);
+  //background: url("../../assets/png/IMG_20210312_140957_174 1.png");
+  //background-position: center;
+  //background-repeat: no-repeat;
+  //backdrop-filter: blur(20px);
+  background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), url("../../assets/png/IMG_20210312_140957_174 1.png") no-repeat center;
 }
 
 .wrapper {

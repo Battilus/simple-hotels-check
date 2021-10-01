@@ -24,7 +24,7 @@ export const priceFilter = (data, direction) => {
         if (a.priceAvg > b.priceAvg) {
             return (direction === 'up') ? -1 : 1;
         }
-        if (a.priceAvg < b.priceAvgs) {
+        if (a.priceAvg < b.priceAvg) {
             return (direction === 'up') ? 1 : -1;
         }
         return 0;

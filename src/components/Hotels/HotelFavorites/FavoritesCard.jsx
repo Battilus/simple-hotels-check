@@ -3,17 +3,17 @@ import style from "./favorites.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import HotelItem from "../MultipleUsage/HotelItem";
 import SvgIcon from '@mui/material/SvgIcon';
-import { ReactComponent as ArrowUp } from "../../../assets/svg/arrows/arrow_up.svg";
-import { ReactComponent as ArrowDown } from "../../../assets/svg/arrows/arrow_down.svg";
-import { ReactComponent as ArrowsDisabled } from "../../../assets/svg/arrows/arrows_disabled.svg";
-// import {sortFavForPrice, sortFavForRating} from "../../../redux/hotels/hotels-actions";
+import {ReactComponent as ArrowUp} from "../../../assets/svg/arrows/arrow_up.svg";
+import {ReactComponent as ArrowDown} from "../../../assets/svg/arrows/arrow_down.svg";
+import {ReactComponent as ArrowsDisabled} from "../../../assets/svg/arrows/arrows_disabled.svg";
+import {sortFavForPrice, sortFavForRating} from "../../../redux/hotels/hotels-actions";
 
 
 const FavoritesCard = () => {
 
-    const [ selected, setSelected ] = useState('rating')
-    const [ ratingDirection , setRatingDirection ] = useState('up' || 'down')
-    const [ priceDirection , setPriceDirection ] = useState('up' || 'down')
+    const [selected, setSelected] = useState('rating')
+    const [ratingDirection, setRatingDirection] = useState('up' || 'down')
+    const [priceDirection, setPriceDirection] = useState('up' || 'down')
 
     const hotelsFromStore = useSelector(state => state.hotels.items)
     const favorites = useSelector(state => state.hotels.favorites)
@@ -37,45 +37,46 @@ const FavoritesCard = () => {
     )
 
     useEffect(() => {
-        // console.log('rating:', ratingDirection)
-        // console.log('price:', priceDirection)
-    })
+        if (selected === 'rating') {
+            dispatch(sortFavForRating({direction: ratingDirection}))
+        } else if (selected === 'price') {
+            dispatch(sortFavForPrice({direction: priceDirection}))
+        }
+    }, [dispatch, selected, ratingDirection, priceDirection])
 
-    // dispatch(sortFavForRating({direction: 'up'}))
-    // dispatch(sortFavForPrice({direction: 'up'}))
     return (
         <div className={style.favorites}>
             <div className={style.head}>Избранное</div>
             <div className={style.favoritesFilterBtns}>
-                <div className={`${style.ratingFilterBtn} ${(selected === 'rating')? style.enabled : ''}`}
+                <div className={`${style.ratingFilterBtn} ${(selected === 'rating') ? style.enabled : ''}`}
                      onClick={() => {
                          if (selected === 'rating') {
-                             setRatingDirection((ratingDirection === 'up')? 'down' : 'up')
+                             setRatingDirection((ratingDirection === 'up') ? 'down' : 'up')
                          } else {
                              setSelected('rating')
                          }
                      }}>
                     Рейтинг
                     <div className={style.arrows}>
-                        {(selected === 'rating')?
-                            (ratingDirection === 'up')?
+                        {(selected === 'rating') ?
+                            (ratingDirection === 'up') ?
                                 <SvgIcon component={ArrowUp}/> :
                                 <SvgIcon component={ArrowDown}/> :
                             <SvgIcon component={ArrowsDisabled}/>}
                     </div>
                 </div>
-                <div className={`${style.priceFilterBtn} ${(selected === 'price')? style.enabled : ''}`}
+                <div className={`${style.priceFilterBtn} ${(selected === 'price') ? style.enabled : ''}`}
                      onClick={() => {
                          if (selected === 'price') {
-                             setPriceDirection((priceDirection === 'up')? 'down' : 'up')
+                             setPriceDirection((priceDirection === 'up') ? 'down' : 'up')
                          } else {
                              setSelected('price')
                          }
                      }}>
                     Цена
                     <div className={style.arrows}>
-                        {(selected === 'price')?
-                            (priceDirection === 'up')?
+                        {(selected === 'price') ?
+                            (priceDirection === 'up') ?
                                 <SvgIcon component={ArrowUp}/> :
                                 <SvgIcon component={ArrowDown}/> :
                             <SvgIcon component={ArrowsDisabled}/>}
