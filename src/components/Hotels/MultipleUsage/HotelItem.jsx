@@ -1,6 +1,6 @@
 import React from "react";
 import Rating from '@mui/material/Rating';
-import {addToFavorites, removeFromFavorites} from "../../../redux/hotels/hotels-actions";
+import {addToFavorites, asyncGetHotelPhotosID, removeFromFavorites} from "../../../redux/hotels/hotels-actions";
 import {useDispatch} from "react-redux";
 import {Favorite, FavoriteBorder} from "@material-ui/icons";
 import Checkbox from '@mui/material/Checkbox';
@@ -40,7 +40,9 @@ const HotelItem = (props) => {
 
     return (
         <div className={style.item}>
-            <div className={style.itemLeft}>
+            <div className={style.itemLeft} onClick={() => {
+                dispatch(asyncGetHotelPhotosID({hotel_id: item.id}))
+            }}>
                 <div className={style.hotelName}>{item.hotelName}</div>
                 <div className={style.days}>{checkInDate} - {livingDays} Дней</div>
                 <Rating

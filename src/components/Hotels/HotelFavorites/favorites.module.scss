@@ -22,6 +22,7 @@
     align-items: center;
     color: #424242;
   }
+
   &Scroller {
     width: 296px;
     height: 472px;
@@ -48,6 +49,7 @@
         padding: 6px 0px;
 
         &Left {
+          cursor: pointer;
 
           .hotelName {
             font-style: normal;
@@ -57,6 +59,7 @@
             letter-spacing: -0.408px;
             color: #424242;
           }
+
           .days {
             font-style: normal;
             font-weight: normal;
@@ -66,13 +69,16 @@
             color: #878787;
           }
         }
+
         &Right {
           display: flex;
           flex-direction: column;
+          justify-content: space-around;
 
           .like {
             align-self: end;
           }
+
           .priceTxt {
             font-style: normal;
             font-weight: 300;
@@ -101,7 +107,69 @@
   }
 
   &FilterBtns {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
     margin-top: 32px;
     margin-bottom: 32px;
+
+    .ratingFilterBtn {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 89px;
+      height: 28px;
+
+      cursor: pointer;
+
+      background: #FFFFFF;
+
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #E5E5E5;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.408px;
+      color: #99A0A3;
+      text-align: left;
+      padding-left: 8px;
+
+    }
+
+    .priceFilterBtn {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      cursor: pointer;
+
+      width: 71px;
+      height: 28px;
+      margin-left: 8px;
+
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      box-sizing: border-box;
+      border-radius: 4px;
+
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.408px;
+      color: #99A0A3;
+      text-align: left;
+      padding-left: 8px;
+
+    }
+
+    .arrows {
+
+    }
+
+    .enabled {
+      border-color: #41522E;
+      color: #41522E;
+    }
   }
 }

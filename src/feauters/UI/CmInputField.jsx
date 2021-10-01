@@ -4,7 +4,8 @@ import {styled, TextField} from "@mui/material";
 export const RecTextField = styled(TextField) ({
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: '#C9CACC',
+            border: '1px solid #C9CACC',
+            borderRadius: '4px',
         },
         '&:hover fieldset': {
             borderColor: 'black',

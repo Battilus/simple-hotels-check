@@ -99,6 +99,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          cursor: pointer;
         }
 
         .item {
@@ -110,6 +111,7 @@
           padding: 24px;
 
           &Left {
+            cursor: pointer;
 
             .hotelName {
               font-style: normal;
