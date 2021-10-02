@@ -28,6 +28,16 @@
     height: 472px;
     overflow: auto;
 
+    &::-webkit-scrollbar {
+      width: 2px;
+      background-color: #E7E7E7;
+      border-radius: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #41522E;
+      width: 3px;
+    }
+
     .favItemWrapper {
       display: flex;
       flex-direction: row;
@@ -40,13 +50,11 @@
 
       .item {
         border-bottom: 2px solid rgba(135, 135, 135, 0.2);
-        //border-radius: 8px;
-
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        padding: 6px 0px;
+        padding: 6px 4px;
 
         &Left {
           cursor: pointer;
