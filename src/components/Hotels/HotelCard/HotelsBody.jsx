@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {convertMonthNumToStr} from "../../../feauters/logic/anyLogic";
 import homeHotelLogo from "../../../assets/svg/HomeHotelLogo.svg";
 import {asyncGetHotelPhotosID} from "../../../redux/hotels/hotels-actions";
+import SvgIcon from '@mui/material/SvgIcon';
+import {ReactComponent as ArrowRight} from "../../../assets/svg/arrows/arrow_right.svg";
 
 
 const HotelsBody = () => {
@@ -17,9 +19,6 @@ const HotelsBody = () => {
     const prevDaysNum = useSelector(state => state.hotels.actRequest.daysNum)
     const prevLocation = useSelector(state => state.hotels.actRequest.location)
     const prevDate = useSelector(state => state.hotels.actRequest.date)
-
-    const requestStatus = useSelector(state => state.hotels.requestStatus)
-    const errorMessage = useSelector(state => state.hotels.errorMessage)
 
     const dispatch = useDispatch();
 
@@ -48,7 +47,9 @@ const HotelsBody = () => {
     return (
         <div className={style.hotelsBody}>
             <div className={style.breadHeader}>
-                <div className={style.breadCrumbs}>Отели > {prevLocation}</div>
+                <div className={style.breadCrumbs}>
+                    Отели {<SvgIcon component={ArrowRight}/>} {prevLocation}
+                </div>
                 <div className={style.reqDate}>{convertMonthNumToStr(prevDate)}</div>
             </div>
             <div className={style.imagesSection}>
@@ -60,10 +61,7 @@ const HotelsBody = () => {
                         favoritesLength === 0) ? ' отелей' : ' отеля'}
             </div>
             <div className={style.hotelsBodyScroller}>
-                {(requestStatus === 'error') ?
-                    <span className={style.error}>{errorMessage}</span> :
-                    hotelsItems
-                }
+                {hotelsItems}
             </div>
         </div>
     )

@@ -16,22 +16,21 @@
       color: #424242;
     }
 
-    button {
+    .logoutButton {
       display: flex;
-      align-items: center;
-      border: none;
+      flex-direction: row;
       background-color: #E5E5E5;
+      cursor: pointer;
+      height: 20px;
 
-      span {
+      &Title {
         font-weight: normal;
         font-size: 16px;
         line-height: 20px;
         letter-spacing: -0.408px;
         color: #41522E;
         text-align: right;
-      }
-      img {
-
+        margin-right: 10px;
       }
     }
   }

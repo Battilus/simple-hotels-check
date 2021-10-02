@@ -21,14 +21,45 @@
     height: 100%;
   }
 
+  .error {
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 37px;
+    color: red;
+  }
+
   .imagesSection {
     padding: 10px;
     height: 174px;
     display: flex;
-    align-items: center;
+    //align-items: center;
     justify-content: center;
 
     .imageSlider {
+      overflow-y: hidden;
+      overflow-x: hidden;
+      white-space: nowrap;
+      width: 100%;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x;
+
+      @media screen and (max-width: 1600px) {
+        overflow-x: auto;
+      }
+
+      &:hover{
+        overflow-x: auto;
+      }
+
+      &::-webkit-scrollbar {
+        height: 10px;
+        background-color: #E7E7E7;
+        border-radius: 6px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #41522E;
+        border-radius: 6px;
+      }
 
       img {
         width: 164px;
@@ -36,6 +67,8 @@
         margin: 6px;
         box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.15);
         border-radius: 10px;
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
       }
     }
   }
@@ -56,6 +89,7 @@
         font-size: 32px;
         line-height: 37px;
         color: #424242;
+        margin-bottom: 20px;
       }
 
       .reqDate {
@@ -75,12 +109,24 @@
       line-height: 22px;
       letter-spacing: -0.408px;
       color: #424242;
+      margin-top: 6px;
+      margin-bottom: 20px;
     }
 
     &Scroller {
       width: 100%;
       height: 600px;
       overflow:auto;
+
+      &::-webkit-scrollbar {
+        width: 2px;
+        background-color: #E7E7E7;
+        border-radius: 2px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #41522E;
+        width: 3px;
+      }
 
       .error {
         color: red;

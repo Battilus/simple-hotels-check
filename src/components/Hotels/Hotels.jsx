@@ -5,6 +5,8 @@ import {signOut} from "../../redux/auth/auth-actions";
 import FilterCard from "./HotelFilter/FilterCard";
 import FavoritesCard from "./HotelFavorites/FavoritesCard";
 import HotelsCard from "./HotelCard/HotelsCard";
+import SvgIcon from '@mui/material/SvgIcon';
+import {ReactComponent as LogOut} from "../../assets/svg/logout.svg";
 import {fstCrutchUpdate} from "../../redux/hotels/hotels-actions";
 
 
@@ -22,15 +24,16 @@ const Hotels = () => {
         if (!crutchUpdater) {
             dispatch(fstCrutchUpdate())
         }
-    })
+    }, [dispatch, crutchUpdater])
 
     return (
         <div className={style.wrapper}>
             <div className={style.header}>
                 <h2>Simple Hotel Check</h2>
-                <button onClick={logOut}>
-                    <span>Выйти</span>
-                </button>
+                <div className={style.logoutButton} onClick={logOut}>
+                    <div className={style.logoutButtonTitle}>Выйти</div>
+                    <SvgIcon component={LogOut}/>
+                </div>
             </div>
             <div className={style.body}>
                 <FilterCard />
